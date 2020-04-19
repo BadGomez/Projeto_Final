@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Projeto_Final</string>
+    <string name="Botão_Criar_Doente">Criar</string>
+    <string name="Botão_Ver">Visualizar</string>
+    <string name="Aplicacão_Nome">Covid-19 na Europa</string>
+</resources>
