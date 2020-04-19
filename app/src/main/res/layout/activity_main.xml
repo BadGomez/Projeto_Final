@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/virus"
+    android:background="@drawable/imagemfundo"
     tools:context=".MainActivity" >
 
     <Button
@@ -14,8 +14,10 @@
         android:layout_marginStart="74dp"
         android:layout_marginLeft="74dp"
         android:hint="@string/Botão_Criar_Doente"
+        android:onClick="CriarDoente"
         android:textColor="#00000000"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/buttonCheck"
         app:layout_constraintEnd_toStartOf="@+id/buttonCheck"
         app:layout_constraintHorizontal_bias="0.0"
@@ -29,7 +31,9 @@
         android:layout_marginRight="74dp"
         android:layout_marginBottom="45dp"
         android:hint="@string/Botão_Ver"
+        android:onClick="VerDados"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -42,6 +46,7 @@
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textSize="36sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/buttonCheck"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
