@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/imagemfundo"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
+
+//https://www.youtube.com/watch?v=ezpOmH50Xdg --> android:background="@drawable/imagemfundo"
 
     <Button
         android:id="@+id/buttonCriar"
