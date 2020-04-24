@@ -64,6 +64,17 @@
                         android:hint="@string/Nacionalidade"
                         android:inputType="textCapWords" />
 
+                    <Spinner
+                        android:id="@+id/spinnergenero"
+                        android:layout_width="match_parent"
+                        android:layout_height="43dp"
+                        android:layout_marginStart="-4dp"
+                        android:layout_marginLeft="-4dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:scrollbarSize="4dp"
+                        android:spinnerMode="dialog" />
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -72,8 +83,8 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/Sexo"
-                            android:inputType="textCapWords" />
+                            android:hint="@string/Data_Nascimento"
+                            android:inputType="date" />
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
@@ -83,9 +94,8 @@
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:hint="@string/Data_Nascimento"
-                                android:inputType="date" />
+                                android:hint="@string/Doente_Cronico"
+                                android:inputType="textCapWords" />
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
@@ -95,7 +105,7 @@
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/Doente_Cronico"
+                                    android:hint="@string/Estado_Atual"
                                     android:inputType="textCapWords" />
 
                                 <com.google.android.material.textfield.TextInputLayout
@@ -106,21 +116,9 @@
                                     <com.google.android.material.textfield.TextInputEditText
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/Estado_Atual"
-                                        android:inputType="textCapWords" />
+                                        android:hint="@string/Data_est_atual"
+                                        android:inputType="date" />
 
-                                    <com.google.android.material.textfield.TextInputLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_marginTop="4dp">
-
-                                        <com.google.android.material.textfield.TextInputEditText
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:hint="@string/Data_est_atual"
-                                            android:inputType="date" />
-
-                                    </com.google.android.material.textfield.TextInputLayout>
                                 </com.google.android.material.textfield.TextInputLayout>
                             </com.google.android.material.textfield.TextInputLayout>
                         </com.google.android.material.textfield.TextInputLayout>
