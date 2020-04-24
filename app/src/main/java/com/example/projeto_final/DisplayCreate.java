@@ -29,7 +29,7 @@ public class DisplayCreate extends AppCompatActivity {
         genero.add(getString(R.string.GeneroF));
         genero.add(getString(R.string.GeneroM));
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, genero);
+        ArrayAdapter <String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, genero);
 
         dropdowngenero.setAdapter(adapter);
 
@@ -54,14 +54,41 @@ public class DisplayCreate extends AppCompatActivity {
         DoencaCronica.add(getString(R.string.DoencaCronicaSim));
         DoencaCronica.add(getString(R.string.DoencaCronicaNao));
 
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, DoencaCronica);
+        ArrayAdapter <String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, DoencaCronica);
 
-        dropdownDoencaCronica.setAdapter((adapter2));
+        dropdownDoencaCronica.setAdapter(adapter2);
 
         dropdownDoencaCronica.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String strTemDoencaCronica = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+     //------------------------------------------------------------
+     // ---------- Spinner de seleção do Estado Atual -------------
+
+        Spinner dropdownEstadoAtual;
+        dropdownEstadoAtual = (Spinner) findViewById(R.id.spinnerEstadoAtual);
+
+        final List<String> EstadoAtual = new ArrayList<>();
+        EstadoAtual.add(getString(R.string.EstadoInfetado));
+        EstadoAtual.add(getString(R.string.EstadoRecuperado));
+        EstadoAtual.add(getString(R.string.EstadoCritico));
+        EstadoAtual.add(getString(R.string.EstadoObito));
+
+        ArrayAdapter <String> adapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, EstadoAtual);
+
+        dropdownEstadoAtual.setAdapter(adapter3);
+
+        dropdownEstadoAtual.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String strEstadoAtual = parent.getItemAtPosition(position).toString();
             }
 
             @Override

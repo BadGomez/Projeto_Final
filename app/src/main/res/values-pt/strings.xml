@@ -5,14 +5,20 @@
     <string name="Botão_Ver">Visualizar</string>
     <string name="Aplicacão_Nome">Covid-19 na Europa</string>
     <string name="Ficha_Inscrição">Ficha de Inscrição</string>
-    <string name="Nome">Nome</string>
-    <string name="Nacionalidade">Nacionalidade</string>
-    <string name="Data_Nascimento">Data de Nascimento</string>
-    <string name="Estado_Atual">Estado Atual</string>
-    <string name="Data_est_atual">Data do Estado Atual</string>
+    <string name="Nome">Nome:</string>
+    <string name="Nacionalidade">Nacionalidade:</string>
+    <string name="Data_Nascimento">Data de Nascimento:</string>
+    <string name="Estado_Atual">Estado Atual:</string>
+    <string name="Data_est_atual">Data do Estado Atual:</string>
     <string name="Botão_Inscrever">Registar</string>
     <string name="GeneroF">Feminino</string>
     <string name="GeneroM">Masculino</string>
-    <string name="DoencaCronicaSim">Yes</string>
-    <string name="DoencaCronicaNao">No</string>
+    <string name="DoencaCronicaSim">Sim</string>
+    <string name="DoencaCronicaNao">Não</string>
+    <string name="Genero">Gênero:</string>
+    <string name="DoenteCronico">Doente Crónico:</string>
+    <string name="EstadoInfetado">Infetado</string>
+    <string name="EstadoRecuperado">Recuperado</string>
+    <string name="EstadoCritico">Critico</string>
+    <string name="EstadoObito">Óbito</string>
 </resources>
