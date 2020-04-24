@@ -6,11 +6,12 @@
     <string name="Ficha_Inscrição">Registration Form</string>
     <string name="Nome">Name</string>
     <string name="Nacionalidade">Nationality</string>
-    <string name="Doente_Cronico">Chronic Sick</string>
     <string name="Data_Nascimento">Date of Birth</string>
     <string name="Estado_Atual">Current State</string>
     <string name="Data_est_atual">Current State Date</string>
     <string name="Botão_Inscrever">Regist</string>
     <string name="GeneroF">Female</string>
     <string name="GeneroM">Male</string>
+    <string name="DoencaCronicaSim">Yes</string>
+    <string name="DoencaCronicaNao">No</string>
 </resources>

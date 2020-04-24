@@ -21,16 +21,15 @@ public class DisplayCreate extends AppCompatActivity {
 
         Intent intentcriar = getIntent();
 
-
-    // ---------- Spinner de seleção do género ----------   https://www.youtube.com/watch?v=4xKsWNmULr0
+     // ---------- Spinner de seleção do Género -----------   https://www.youtube.com/watch?v=4xKsWNmULr0
         Spinner dropdowngenero;
-        dropdowngenero = (Spinner) findViewById(R.id.spinnergenero);
+        dropdowngenero = (Spinner) findViewById(R.id.spinnerGenero);
 
         final List<String> genero = new ArrayList<>();
         genero.add(getString(R.string.GeneroF));
         genero.add(getString(R.string.GeneroM));
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String >(this, android.R.layout.simple_spinner_item, genero);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, genero);
 
         dropdowngenero.setAdapter(adapter);
 
@@ -45,7 +44,31 @@ public class DisplayCreate extends AppCompatActivity {
 
             }
         });
-    //---------------------------------------------
+     //------------------------------------------------------------
 
+     // ---------- Spinner de seleção de Doença Crónica -----------
+        Spinner dropdownDoencaCronica;
+        dropdownDoencaCronica = (Spinner) findViewById(R.id.spinnerDoencaCronica);
+
+        final List<String> DoencaCronica = new ArrayList<>();
+        DoencaCronica.add(getString(R.string.DoencaCronicaSim));
+        DoencaCronica.add(getString(R.string.DoencaCronicaNao));
+
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, DoencaCronica);
+
+        dropdownDoencaCronica.setAdapter((adapter2));
+
+        dropdownDoencaCronica.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String strTemDoencaCronica = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+     //------------------------------------------------------------
     }
 }
