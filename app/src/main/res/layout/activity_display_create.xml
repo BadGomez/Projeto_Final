@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="17dp"
         android:layout_marginRight="30dp">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -36,12 +36,24 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="338dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
                 android:hint="@string/Nacionalidade"
-                android:inputType="textCapWords"
-                android:textColorHint="#FFFFFF" />
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/spinnerPaises"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:layout_marginStart="-4dp"
+                android:layout_marginLeft="-4dp"
+                android:layout_weight="1"
+                android:spinnerMode="dialog" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -58,11 +70,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
                 android:layout_marginStart="-4dp"
+                android:layout_marginLeft="-4dp"
                 android:layout_weight="1"
                 android:longClickable="false"
                 android:scrollbarSize="4dp"
-                android:spinnerMode="dialog"
-                android:layout_marginLeft="-4dp" />
+                android:spinnerMode="dialog" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -108,11 +120,11 @@
                     android:id="@+id/spinnerEstadoAtual"
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
+                    android:layout_marginStart="-4dp"
+                    android:layout_marginLeft="-4dp"
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
-                    android:layout_marginStart="-4dp"
-                    android:spinnerMode="dialog"
-                    android:layout_marginLeft="-4dp" />
+                    android:spinnerMode="dialog" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
