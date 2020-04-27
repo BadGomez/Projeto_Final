@@ -84,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/Data_Nascimento"
-                    android:inputType="date" />
+                    android:inputType="date"/>
 
                 <TextView
                     android:id="@+id/textView4"
