@@ -14,9 +14,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void CriarDoente(View view){
-        Intent intentcriar = new Intent(this, DisplayCreate.class);
-        startActivity(intentcriar);
+    public void Pacientes(View view){
+        Intent intentPacientes = new Intent(this, DisplayPacientes.class);
+        startActivity(intentPacientes);
     }
 
     public void VerDados(View view){

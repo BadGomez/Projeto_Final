@@ -67,4 +67,7 @@
     <string name="País_Suiça">Switzerland</string>
     <string name="País_Turquia">Turquia</string>
     <string name="País_Ucrânia">Ukraine</string>
+    <string name="Paciente">Patients</string>
+    <string name="Botão_Editar">Edit</string>
+    <string name="Botão_Eliminar">Eliminate</string>
 </resources>
