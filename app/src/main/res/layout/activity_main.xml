@@ -7,7 +7,7 @@
     android:background="@drawable/imagemfundo"
     tools:context=".MainActivity">
 
-//https://www.youtube.com/watch?v=ezpOmH50Xdg --> android:background="@drawable/imagemfundo"
+    //https://www.youtube.com/watch?v=ezpOmH50Xdg --> android:background="@drawable/imagemfundo"
 
     <Button
         android:id="@+id/buttonCriar"
