@@ -4,7 +4,7 @@
     <string name="Botão_Ver">Check</string>
     <string name="Aplicacão_Nome">Covid-19 in Europe</string>
     <string name="Ficha_Inscrição">Registration Form</string>
-    <string name="Nome">Name:</string>
+    <string name="Nome">Full Name:</string>
     <string name="Data_Nascimento">Date of Birth:</string>
     <string name="Estado_Atual">Current State:</string>
     <string name="Data_est_atual">Current State Date:</string>
@@ -70,4 +70,6 @@
     <string name="Paciente">Patients</string>
     <string name="Botão_Editar">Edit</string>
     <string name="Botão_Eliminar">Eliminate</string>
+    <string name="Campo_Obrigatorio">Required field!</string>
+    <string name="CampoInválido">" Invalid Field!"</string>
 </resources>

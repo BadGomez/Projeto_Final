@@ -5,7 +5,7 @@
     <string name="Botão_Ver">Visualizar</string>
     <string name="Aplicacão_Nome">Covid-19 na Europa</string>
     <string name="Ficha_Inscrição">Ficha de Inscrição</string>
-    <string name="Nome">Nome:</string>
+    <string name="Nome">Nome Completo:</string>
     <string name="Nacionalidade">País:</string>
     <string name="Data_Nascimento">Data de Nascimento:</string>
     <string name="Estado_Atual">Estado Atual:</string>
@@ -71,4 +71,6 @@
     <string name="Paciente">Pacientes</string>
     <string name="Botão_Editar">Editar</string>
     <string name="Botão_Eliminar">Eliminar</string>
+    <string name="Campo_Obrigatorio">Campo obrigatório!</string>
+    <string name="CampoInválido">Campo Inválido!</string>
 </resources>

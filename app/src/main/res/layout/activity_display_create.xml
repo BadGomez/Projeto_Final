@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -26,10 +25,12 @@
         android:layout_marginRight="30dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextInputEditNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/Nome"
-            android:inputType="textPersonName|textCapWords" />
+            android:inputType="textFilter|textPersonName|textCapWords"
+            android:digits="aãâáàbcçdeéfghiíjklmnoõôóòpqrstuvwxyz AÃÂÁÀBCÇDEÉFGHIÍJKLMNOÕÔÓÒPQRSTUVWXYZ"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -81,6 +82,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/TextInputEditDataNascimento"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/Data_Nascimento"
@@ -131,6 +133,7 @@
                     android:layout_height="match_parent">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/TextInputEditDataEstadoAtual"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/Data_est_atual"
@@ -144,10 +147,11 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonNovoRegisto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/Botão_Inscrever"
+        android:onClick="NovoRegisto"
         android:textSize="16sp"
         android:textStyle="bold" />
 

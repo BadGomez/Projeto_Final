@@ -9,7 +9,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.google.android.material.textfield.TextInputEditText;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DisplayCreate extends AppCompatActivity {
@@ -100,6 +105,7 @@ public class DisplayCreate extends AppCompatActivity {
             }
         });
      //------------------------------------------------------------
+
      // ---------- Spinner de seleção do País ---------------------
 
         Spinner dropdownPaises;
@@ -171,4 +177,46 @@ public class DisplayCreate extends AppCompatActivity {
         });
      //------------------------------------------------------------
     }
+
+    public void NovoRegisto(View view){
+        TextInputEditText TextInputEditNome = (TextInputEditText) findViewById(R.id.TextInputEditNome);
+        String nome = TextInputEditNome.getText().toString();
+
+        if(nome.length() < 1){
+            TextInputEditNome.setError(getString(R.string.Campo_Obrigatorio));
+            TextInputEditNome.requestFocus();
+            return;
+        }
+
+        //------------------------------------Data de Aniversário-------------------------------
+        TextInputEditText TextInputEditDataNascimento = (TextInputEditText) findViewById(R.id.TextInputEditDataNascimento);
+
+        Date data = null;
+        String dataTexto = new String(TextInputEditDataNascimento.getText().toString());
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            format.setLenient(false);
+            data = format.parse(dataTexto);
+        } catch (ParseException e) {
+            TextInputEditDataNascimento.setError(getString(R.string.CampoInválido));
+            TextInputEditDataNascimento.requestFocus();
+            return;
+        }
+        //---------------------------------------------------------------------------------------
+        //------------------------------------Data Estado Atual----------------------------------
+        TextInputEditText TextInputEditDataEstadoAtual = (TextInputEditText) findViewById(R.id.TextInputEditDataEstadoAtual);
+
+        Date data2 = null;
+        String dataTexto2 = new String(TextInputEditDataEstadoAtual.getText().toString());
+        try {
+            format.setLenient(false);
+            data2 = format.parse(dataTexto2);
+        } catch (ParseException e) {
+            TextInputEditDataEstadoAtual.setError(getString(R.string.CampoInválido));
+            TextInputEditDataEstadoAtual.requestFocus();
+            return;
+        }
+        //---------------------------------------------------------------------------------------
+    }
+
 }
