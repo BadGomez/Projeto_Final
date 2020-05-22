@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
 import static junit.framework.TestCase.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
-public class BdPacientesTest {
+public class BdTest {
   @Before
   public void apagarBD(){
       getTargetContext().deleteDatabase(BdPacientesOpenHelper.NOME_BASE_DADOS);

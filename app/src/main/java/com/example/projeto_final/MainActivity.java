@@ -19,6 +19,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intentPacientes);
     }
 
+    public void Noticias(View view){
+        Intent intentNoticias = new Intent(this, DisplayNoticias.class);
+        startActivity(intentNoticias);
+    }
+
     public void VerDados(View view){
         Intent intentver = new Intent(this, DisplayVer.class);
         startActivity(intentver);

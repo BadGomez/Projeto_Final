@@ -10,18 +10,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DisplayPacientes"
-                  android:screenOrientation="userPortrait"
-                  tools:ignore="LockedOrientationActivity"></activity>
-        <activity android:name=".DisplayVer"
-                  android:screenOrientation="userPortrait"
-                  tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".DisplayCreate"
-                  android:screenOrientation="userPortrait"
-                  tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".MainActivity"
-                  android:screenOrientation="userPortrait"
-                  tools:ignore="LockedOrientationActivity">
+        <activity android:name=".DisplayNoticias"></activity>
+        <activity
+            android:name=".DisplayPacientes"
+            android:screenOrientation="userPortrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".DisplayVer"
+            android:screenOrientation="userPortrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".DisplayCreate"
+            android:screenOrientation="userPortrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="userPortrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

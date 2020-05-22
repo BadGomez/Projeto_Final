@@ -9,18 +9,19 @@
 
     //https://www.youtube.com/watch?v=ezpOmH50Xdg --> android:background="@drawable/imagemfundo"
 
+
     <Button
         android:id="@+id/buttonCriar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="74dp"
-        android:layout_marginLeft="74dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:hint="@string/Paciente"
         android:onClick="Pacientes"
         android:textColor="#00000000"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/buttonCheck"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonNoticias"
         app:layout_constraintEnd_toStartOf="@+id/buttonCheck"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
@@ -29,15 +30,30 @@
         android:id="@+id/buttonCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="74dp"
-        android:layout_marginRight="74dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginBottom="45dp"
         android:hint="@string/Botão_Ver"
         android:onClick="VerDados"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/buttonNoticias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/Botão_Noticias"
+        android:onClick="Noticias"
+        android:textColor="@color/design_default_color_on_secondary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonCheck"
+        app:layout_constraintEnd_toStartOf="@+id/buttonCheck"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toEndOf="@+id/buttonCriar" />
 
     <TextView
         android:id="@+id/textViewNomeApp"
