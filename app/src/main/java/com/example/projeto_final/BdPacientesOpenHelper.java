@@ -15,15 +15,10 @@ public class BdPacientesOpenHelper extends SQLiteOpenHelper {
      * This method always returns very quickly.  The database is not actually
      * created or opened until one of {@link #getWritableDatabase} or
      * {@link #getReadableDatabase} is called.
+     *  @param context to use for locating paths to the the database
      *
-     * @param context to use for locating paths to the the database
-     * @param name    of the database file, or null for an in-memory database
-     * @param factory to use for creating cursor objects, or null for the default
-     * @param version number of the database (starting at 1); if the database is older,
-     *                {@link #onUpgrade} will be used to upgrade the database; if the database is
-     *                newer, {@link #onDowngrade} will be used to downgrade the database
      */
-    public BdPacientesOpenHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    public BdPacientesOpenHelper(@Nullable Context context) {
        super(context, NOME_BASE_DADOS, null, VERSAO_BASE_DADOS);
     }
 
