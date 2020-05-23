@@ -32,4 +32,12 @@ public class BdTest {
     private Context getTargetContext() {
        return InstrumentationRegistry.getInstrumentation().getTargetContext();
    }
+
+   //public long inserePaciente(BdTabelaPacientes tabelaPacientes, ){
+
+   //}
+
+  // private long inserePaciente(SQLiteDatabase BdTabelaPacientes, String Nome, String Pais, String Genero, String Data_Aniversario, String Doente_Cronico, String Estado_Atual, String Data_Estado_Atual){
+  //    BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(BdTabelaPacientes);
+  // }
 }

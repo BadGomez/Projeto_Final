@@ -192,11 +192,11 @@ public class DisplayCreate extends AppCompatActivity {
         TextInputEditText TextInputEditDataNascimento = (TextInputEditText) findViewById(R.id.TextInputEditDataNascimento);
 
         Date data = null;
-        String dataTexto = new String(TextInputEditDataNascimento.getText().toString());
+        String dataAniversario = new String(TextInputEditDataNascimento.getText().toString());
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         try {
             format.setLenient(false);
-            data = format.parse(dataTexto);
+            data = format.parse(dataAniversario);
         } catch (ParseException e) {
             TextInputEditDataNascimento.setError(getString(R.string.CampoInválido));
             TextInputEditDataNascimento.requestFocus();
@@ -207,10 +207,10 @@ public class DisplayCreate extends AppCompatActivity {
         TextInputEditText TextInputEditDataEstadoAtual = (TextInputEditText) findViewById(R.id.TextInputEditDataEstadoAtual);
 
         Date data2 = null;
-        String dataTexto2 = new String(TextInputEditDataEstadoAtual.getText().toString());
+        String dataEstadoAtual = new String(TextInputEditDataEstadoAtual.getText().toString());
         try {
             format.setLenient(false);
-            data2 = format.parse(dataTexto2);
+            data2 = format.parse(dataEstadoAtual);
         } catch (ParseException e) {
             TextInputEditDataEstadoAtual.setError(getString(R.string.CampoInválido));
             TextInputEditDataEstadoAtual.requestFocus();

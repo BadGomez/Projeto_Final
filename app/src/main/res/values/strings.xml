@@ -71,6 +71,6 @@
     <string name="Botão_Editar">Edit</string>
     <string name="Botão_Eliminar">Eliminate</string>
     <string name="Campo_Obrigatorio">Required field!</string>
-    <string name="CampoInválido">" Invalid Field!"</string>
+    <string name="CampoInválido">" Invalid Field! (dd/MM/yyyy)"</string>
     <string name="Botão_Noticias">News</string>
 </resources>

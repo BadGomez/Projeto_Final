@@ -6,14 +6,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
 
 public class BdTabelaPacientes implements BaseColumns {
-    public static final String NOME_TABELA = "Pacientes";
-    public static final String NOME_PACIENTE = "Nome";
-    public static final String PAIS_PACIENTE ="Pais";
-    public static final String GENERO_PACIENTE ="Genero";
-    public static final String DATA_NASCIMENTO_PACIENTE = "Data_Aniversario";
-    public static final String DOENCA_CRONICA_PACIENTE = "Doente_Cronico";
-    public static final String ESTADO_ATUAL_PACIENTE = "Estado_Atual";
-    public static final String DATA_ESTADO_ATUAL_PACIENTE = "Data_Estado_Atual";
+    public static final String NOME_TABELA = "pacientes";
+    public static final String NOME_PACIENTE = "nome";
+    public static final String PAIS_PACIENTE ="pais";
+    public static final String GENERO_PACIENTE ="genero";
+    public static final String DATA_NASCIMENTO_PACIENTE = "data_aniversario";
+    public static final String DOENCA_CRONICA_PACIENTE = "doente_cronico";
+    public static final String ESTADO_ATUAL_PACIENTE = "estado_atual";
+    public static final String DATA_ESTADO_ATUAL_PACIENTE = "data_astado_atual";
+
 
     private SQLiteDatabase db;
     public BdTabelaPacientes(SQLiteDatabase db) {
