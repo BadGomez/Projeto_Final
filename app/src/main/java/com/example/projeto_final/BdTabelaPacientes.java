@@ -13,7 +13,7 @@ public class BdTabelaPacientes implements BaseColumns {
     public static final String DATA_NASCIMENTO_PACIENTE = "data_aniversario";
     public static final String DOENCA_CRONICA_PACIENTE = "doente_cronico";
     public static final String ESTADO_ATUAL_PACIENTE = "estado_atual";
-    public static final String DATA_ESTADO_ATUAL_PACIENTE = "data_astado_atual";
+    public static final String DATA_ESTADO_ATUAL_PACIENTE = "data_estado_atual";
 
 
     private SQLiteDatabase db;

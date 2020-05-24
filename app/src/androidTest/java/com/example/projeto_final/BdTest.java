@@ -41,7 +41,27 @@ public class BdTest {
         return id;
    }
 
-  // private long inserePaciente(SQLiteDatabase BdTabelaPacientes, String Nome, String Pais, String Genero, String Data_Aniversario, String Doente_Cronico, String Estado_Atual, String Data_Estado_Atual){
-  //    BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(BdTabelaPacientes);
-  // }
+  private long inserePaciente(BdTabelaPacientes tabelaPacientes, String nome, String pais, String genero, String data_aniversario, String doente_cronico, String estado_atual, String data_estado_atual){
+      Paciente paciente = new Paciente();
+        paciente.setNome(nome);
+        paciente.setPais(pais);
+        paciente.setGenero(genero);
+        paciente.setData_Aniversario(data_aniversario);
+        paciente.setDoente_Cronico(doente_cronico);
+        paciente.setEstado_Atual(estado_atual);
+        paciente.setData_Estado_Atual(data_estado_atual);
+      return inserePaciente(tabelaPacientes, nome, pais, genero, data_aniversario, doente_cronico, estado_atual, data_estado_atual);
+  }
+
+  @Test
+  public void consegueInserirPaciente(){
+      Context appContext = getTargetContext();
+      BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+      SQLiteDatabase bd = openHelper.getWritableDatabase();
+
+      BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(bd);
+      inserePaciente(tabelaPacientes, "Valter Rodrigues Simões", "Portugal", "Masculino", "11/05/2000", "Não", "Recuperado", "24/05/2020");
+
+      bd.close();
+  }
 }

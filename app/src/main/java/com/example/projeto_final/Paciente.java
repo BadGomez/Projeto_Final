@@ -8,7 +8,7 @@ class Paciente {
     private String data_aniversario;
     private String doente_cronico;
     private String estado_atual;
-    private String data_astado_atual;
+    private String data_estado_atual;
 
     public long getId() {
         return id;
@@ -67,10 +67,10 @@ class Paciente {
     }
 
     public String getData_Estado_Atual() {
-        return data_astado_atual;
+        return data_estado_atual;
     }
 
-    public void setData_Estado_Atual(String data_astado_atual) {
-        this.data_astado_atual = data_astado_atual;
+    public void setData_Estado_Atual(String data_estado_atual) {
+        this.data_estado_atual = data_estado_atual;
     }
 }
