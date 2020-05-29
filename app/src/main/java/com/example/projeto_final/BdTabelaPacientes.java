@@ -14,6 +14,7 @@ public class BdTabelaPacientes implements BaseColumns {
     public static final String DOENCA_CRONICA_PACIENTE = "doente_cronico";
     public static final String ESTADO_ATUAL_PACIENTE = "estado_atual";
     public static final String DATA_ESTADO_ATUAL_PACIENTE = "data_estado_atual";
+    public static final String[] TODOS_CAMPOS = {_ID, NOME_PACIENTE, PAIS_PACIENTE, GENERO_PACIENTE, DATA_NASCIMENTO_PACIENTE, DOENCA_CRONICA_PACIENTE, ESTADO_ATUAL_PACIENTE, DATA_ESTADO_ATUAL_PACIENTE};
 
 
     private SQLiteDatabase db;
@@ -25,15 +26,14 @@ public class BdTabelaPacientes implements BaseColumns {
         db.execSQL(
                 "CREATE TABLE " + NOME_TABELA + "(" +
                         _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        NOME_PACIENTE + "TEXT NOT NULL," +
-                        PAIS_PACIENTE + "TEXT NOT NULL," +
-                        GENERO_PACIENTE + "TEXT NOT NULL," +
-                        DATA_NASCIMENTO_PACIENTE + "TEXT NOT NULL," +
-                        DOENCA_CRONICA_PACIENTE + "TEXT NOT NULL," +
-                        ESTADO_ATUAL_PACIENTE + "TEXT NOT NULL," +
-                        DATA_ESTADO_ATUAL_PACIENTE + "TEXT NOT NULL" +
-                ")"
-        );
+                        NOME_PACIENTE + " TEXT NOT NULL," +
+                        PAIS_PACIENTE + " TEXT NOT NULL," +
+                        GENERO_PACIENTE + " TEXT NOT NULL," +
+                        DATA_NASCIMENTO_PACIENTE + " TEXT NOT NULL," +
+                        DOENCA_CRONICA_PACIENTE + " TEXT NOT NULL," +
+                        ESTADO_ATUAL_PACIENTE + " TEXT NOT NULL," +
+                        DATA_ESTADO_ATUAL_PACIENTE + " TEXT NOT NULL" +
+                ")");
     }
 
     public long insert(ContentValues values){

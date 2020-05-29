@@ -6,40 +6,42 @@ import android.database.sqlite.SQLiteDatabase;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static junit.framework.TestCase.assertTrue;
+//import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
 public class BdTest {
   @Before
-  public void apagarBD(){
+  @After
+  public void apagarBaseDados(){
       getTargetContext().deleteDatabase(BdPacientesOpenHelper.NOME_BASE_DADOS);
   }
 
   @Test
-  public void consegueAbrirBD(){
+  public void consegueAbrirBaseDados(){
       Context appContext = getTargetContext();
 
       BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
       SQLiteDatabase bd = openHelper.getReadableDatabase();
       assertTrue(bd.isOpen());
-      bd.getClass();
+      bd.close();
   }
 
     private Context getTargetContext() {
        return InstrumentationRegistry.getInstrumentation().getTargetContext();
    }
 
-   public long inserePaciente(BdTabelaPacientes tabelaPacientes, Paciente paciente){
+   private long inserePaciente(BdTabelaPacientes tabelaPacientes, Paciente paciente) {
         long id = tabelaPacientes.insert(Converte.pacienteToContentValues(paciente));
-        assertNotEquals (-1, id);
+        assertNotEquals(-1, id);
 
         return id;
-   }
+    }
 
   private long inserePaciente(BdTabelaPacientes tabelaPacientes, String nome, String pais, String genero, String data_aniversario, String doente_cronico, String estado_atual, String data_estado_atual){
       Paciente paciente = new Paciente();
@@ -50,7 +52,7 @@ public class BdTest {
         paciente.setDoente_Cronico(doente_cronico);
         paciente.setEstado_Atual(estado_atual);
         paciente.setData_Estado_Atual(data_estado_atual);
-      return inserePaciente(tabelaPacientes, nome, pais, genero, data_aniversario, doente_cronico, estado_atual, data_estado_atual);
+      return inserePaciente(tabelaPacientes, paciente);
   }
 
   @Test

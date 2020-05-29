@@ -42,7 +42,7 @@ public class DisplayCreate extends AppCompatActivity {
         dropdowngenero.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String strGeneroInserido = parent.getItemAtPosition(position).toString();
+                String genero = parent.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -68,7 +68,7 @@ public class DisplayCreate extends AppCompatActivity {
         dropdownDoencaCronica.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String strTemDoencaCronica = parent.getItemAtPosition(position).toString();
+                String doente_cronico = parent.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -96,7 +96,7 @@ public class DisplayCreate extends AppCompatActivity {
         dropdownEstadoAtual.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String strEstadoAtual = parent.getItemAtPosition(position).toString();
+                String estado_atual = parent.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -167,7 +167,7 @@ public class DisplayCreate extends AppCompatActivity {
         dropdownPaises.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String strPais = parent.getItemAtPosition(position).toString();
+                String pais = parent.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -192,11 +192,11 @@ public class DisplayCreate extends AppCompatActivity {
         TextInputEditText TextInputEditDataNascimento = (TextInputEditText) findViewById(R.id.TextInputEditDataNascimento);
 
         Date data = null;
-        String dataAniversario = new String(TextInputEditDataNascimento.getText().toString());
+        String data_aniversario = new String(TextInputEditDataNascimento.getText().toString());
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         try {
             format.setLenient(false);
-            data = format.parse(dataAniversario);
+            data = format.parse(data_aniversario);
         } catch (ParseException e) {
             TextInputEditDataNascimento.setError(getString(R.string.CampoInválido));
             TextInputEditDataNascimento.requestFocus();
@@ -207,10 +207,10 @@ public class DisplayCreate extends AppCompatActivity {
         TextInputEditText TextInputEditDataEstadoAtual = (TextInputEditText) findViewById(R.id.TextInputEditDataEstadoAtual);
 
         Date data2 = null;
-        String dataEstadoAtual = new String(TextInputEditDataEstadoAtual.getText().toString());
+        String data_estado_atual = new String(TextInputEditDataEstadoAtual.getText().toString());
         try {
             format.setLenient(false);
-            data2 = format.parse(dataEstadoAtual);
+            data2 = format.parse(data_estado_atual);
         } catch (ParseException e) {
             TextInputEditDataEstadoAtual.setError(getString(R.string.CampoInválido));
             TextInputEditDataEstadoAtual.requestFocus();
