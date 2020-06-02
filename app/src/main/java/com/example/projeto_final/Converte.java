@@ -30,7 +30,7 @@ public class Converte {
         return paciente;
     }
 
-    public static Paciente cursorToPaciente(Cursor cursor){
+   /* public static Paciente cursorToPaciente(Cursor cursor){
         Paciente paciente = new Paciente();
             paciente.setId(cursor.getLong(cursor.getColumnIndex(BdTabelaPacientes._ID)));
             paciente.setNome(cursor.getString(cursor.getColumnIndex(BdTabelaPacientes.NOME_PACIENTE)));
@@ -42,5 +42,5 @@ public class Converte {
             paciente.setData_Estado_Atual(cursor.getString(cursor.getColumnIndex(BdTabelaPacientes.DATA_ESTADO_ATUAL_PACIENTE)));
         return paciente;
     }
-
+    */
 }

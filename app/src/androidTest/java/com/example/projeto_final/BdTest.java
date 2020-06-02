@@ -1,6 +1,7 @@
 package com.example.projeto_final;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -63,6 +64,27 @@ public class BdTest {
 
       BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(bd);
       inserePaciente(tabelaPacientes, "Valter Rodrigues Simões", "Portugal", "Masculino", "11/05/2000", "Não", "Recuperado", "24/05/2020");
+
+      bd.close();
+  }
+
+  @Test
+    public void consegueLerPaciente(){
+      Context appContext = getTargetContext();
+      BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+      SQLiteDatabase bd = openHelper.getWritableDatabase();
+
+      BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(bd);
+
+      Cursor cursor = tabelaPacientes.query(BdTabelaPacientes.TODOS_CAMPOS, null, null, null, null, null);
+      int numeroPacientes = cursor.getCount();
+      cursor.close();
+
+      inserePaciente(tabelaPacientes, "João António Faria", "Portugal" , "Masculino", "17/12/1987", "Sim", "Infetado", "02/06/2000");
+
+      cursor = tabelaPacientes.query(BdTabelaPacientes.TODOS_CAMPOS, null, null, null, null, null);
+      assertEquals(numeroPacientes + 1, cursor.getCount());
+      cursor.close();
 
       bd.close();
   }
