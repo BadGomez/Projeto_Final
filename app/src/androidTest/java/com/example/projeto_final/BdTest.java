@@ -88,4 +88,54 @@ public class BdTest {
 
       bd.close();
   }
+
+  @Test
+    public void consegueEditarPaciente(){
+      Context appContext = getTargetContext();
+      BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+      SQLiteDatabase bd = openHelper.getWritableDatabase();
+
+      BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(bd);
+
+      Paciente paciente = new Paciente();
+      paciente.setNome("Francisca Miranda Alonso");
+      paciente.setPais("Espanha");
+      paciente.setGenero("Feminino");
+      paciente.setData_Aniversario("09/08/1999");
+      paciente.setDoente_Cronico("Não");
+      paciente.setEstado_Atual("Infetado");
+      paciente.setData_Estado_Atual("03/06/2020");
+
+      long id = inserePaciente(tabelaPacientes, paciente);
+
+      paciente.setNome("Francisca Miranda Alonso");
+      paciente.setPais("Espanha");
+      paciente.setGenero("Feminino");
+      paciente.setData_Aniversario("09/08/1999");
+      paciente.setDoente_Cronico("Sim");
+      paciente.setEstado_Atual("Infetado");
+      paciente.setData_Estado_Atual("03/06/2020");
+
+      int registoAlterado = tabelaPacientes.update(Converte.pacienteToContentValues(paciente), BdTabelaPacientes._ID + "=?", new String[]{String.valueOf(id)});
+      assertEquals(1, registoAlterado);
+
+      bd.close();
+  }
+
+  @Test
+    public void consegueApagarPaciente(){
+      Context appContext = getTargetContext();
+
+      BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+      SQLiteDatabase bd = openHelper.getWritableDatabase();
+
+      BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(bd);
+
+      long id = inserePaciente(tabelaPacientes, "Gonçalo Sebastião Saraiva","Portugal", "Masculino", "15/02/2000", "Não", "Recuperado", "25/05/2020");
+
+      int registoApagado = tabelaPacientes.delete(BdTabelaPacientes._ID + "=?", new String[]{String.valueOf(id)});
+      assertEquals(1, registoApagado);
+
+      bd.close();
+  }
 }
