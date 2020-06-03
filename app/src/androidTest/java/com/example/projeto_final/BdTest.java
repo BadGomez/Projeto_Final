@@ -76,13 +76,13 @@ public class BdTest {
 
       BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(bd);
 
-      Cursor cursor = tabelaPacientes.query(BdTabelaPacientes.TODOS_CAMPOS, null, null, null, null, null);
+      Cursor cursor = tabelaPacientes.query(BdTabelaPacientes.TODOS_CAMPOS_PACIENTE, null, null, null, null, null);
       int numeroPacientes = cursor.getCount();
       cursor.close();
 
       inserePaciente(tabelaPacientes, "João António Faria", "Portugal" , "Masculino", "17/12/1987", "Sim", "Infetado", "02/06/2000");
 
-      cursor = tabelaPacientes.query(BdTabelaPacientes.TODOS_CAMPOS, null, null, null, null, null);
+      cursor = tabelaPacientes.query(BdTabelaPacientes.TODOS_CAMPOS_PACIENTE, null, null, null, null, null);
       assertEquals(numeroPacientes + 1, cursor.getCount());
       cursor.close();
 
