@@ -24,9 +24,9 @@ public class BdTabelaNoticias implements BaseColumns {
                         _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                         TITULO_NOTICIA + " TEXT NOT NULL," +
                         DATA_NOTICIA + " TEXT NOT NULL," +
-                        CONTEUDO_NOTICIA + " TEXT NOT NULL," +
-        //todo: falta o id do pais correspondente desta noticia
+                        CONTEUDO_NOTICIA + " TEXT NOT NULL" +
                         ")");
+        //todo: falta o id do pais correspondente desta noticia
     }
 
     public long insert(ContentValues values) {
