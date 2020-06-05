@@ -1,7 +1,6 @@
 package com.example.projeto_final;
 
 import android.content.ContentValues;
-import android.database.Cursor;
 
 public class Converte {
 
@@ -28,6 +27,29 @@ public class Converte {
             paciente.setEstado_Atual(valores.getAsString(BdTabelaPacientes.ESTADO_ATUAL_PACIENTE));
             paciente.setData_Estado_Atual(valores.getAsString(BdTabelaPacientes.DATA_ESTADO_ATUAL_PACIENTE));
         return paciente;
+    }
+
+    public static ContentValues noticiaToContentValues(Noticia noticia){
+        ContentValues valores = new ContentValues();
+
+        //todo: falta id pais
+        valores.put(BdTabelaNoticias.TITULO_NOTICIA, noticia.getTitulo());
+        valores.put(BdTabelaNoticias.DATA_NOTICIA, noticia.getData());
+        valores.put(BdTabelaNoticias.CONTEUDO_NOTICIA, noticia.getConteudo());
+
+        return valores;
+    }
+
+    public static Noticia contentValuesToNoticia(ContentValues valores){
+        Noticia noticia = new Noticia();
+
+        //todo: falta id pais
+        noticia.setId(valores.getAsLong(BdTabelaNoticias._ID));
+        noticia.setTitulo(valores.getAsString(BdTabelaNoticias.TITULO_NOTICIA));
+        noticia.setData(valores.getAsString(BdTabelaNoticias.DATA_NOTICIA));
+        noticia.setConteudo(valores.getAsString(BdTabelaNoticias.CONTEUDO_NOTICIA));
+
+        return noticia;
     }
 
    /* public static Paciente cursorToPaciente(Cursor cursor){
