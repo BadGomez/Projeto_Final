@@ -8,7 +8,6 @@ import android.view.View;
 
 public class DisplayPacientes extends AppCompatActivity{
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +20,4 @@ public class DisplayPacientes extends AppCompatActivity{
         Intent intentcriar = new Intent(this, DisplayCreate.class);
         startActivity(intentcriar);
     }
-
-
 }
