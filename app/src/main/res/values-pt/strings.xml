@@ -74,4 +74,9 @@
     <string name="Campo_Obrigatorio">Campo obrigatório!</string>
     <string name="CampoInválido">Campo Inválido! (dd/MM/yyyy)</string>
     <string name="Botão_Noticias">Notícias</string>
+    <string name="Nova_Noticia">Nova Noticia</string>
+    <string name="Titulo">Título:</string>
+    <string name="Descricao">Descrição:</string>
+    <string name="Data_Noticia">Data:</string>
+    <string name="Criar_Not">Criar</string>
 </resources>
