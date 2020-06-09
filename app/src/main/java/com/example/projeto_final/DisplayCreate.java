@@ -1,5 +1,6 @@
 package com.example.projeto_final;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CalendarView;
 import android.widget.Spinner;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -188,35 +190,26 @@ public class DisplayCreate extends AppCompatActivity {
             return;
         }
 
-        //------------------------------------Data de Aniversário-------------------------------
-        TextInputEditText TextInputEditDataNascimento = (TextInputEditText) findViewById(R.id.TextInputEditDataNascimento);
+        //------------------------------------Data de Aniversário------------------------------- https://www.youtube.com/watch?v=j_-dmsRWL3g
+        CalendarView calendarViewDataNascimento = (CalendarView) findViewById(R.id.calendarViewDataNascimento);
 
-        Date data = null;
-        String data_aniversario = new String(TextInputEditDataNascimento.getText().toString());
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            format.setLenient(false);
-            data = format.parse(data_aniversario);
-        } catch (ParseException e) {
-            TextInputEditDataNascimento.setError(getString(R.string.CampoInválido));
-            TextInputEditDataNascimento.requestFocus();
-            return;
-        }
+        calendarViewDataNascimento.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                String dateAniversario = dayOfMonth+"/"+month+"/"+year;
+            }
+        });
         //---------------------------------------------------------------------------------------
         //------------------------------------Data Estado Atual----------------------------------
-        TextInputEditText TextInputEditDataEstadoAtual = (TextInputEditText) findViewById(R.id.TextInputEditDataEstadoAtual);
+        CalendarView calendarViewDataEstadoAtual = (CalendarView) findViewById(R.id.calendarViewDataEstadoAtual);
 
-        Date data2 = null;
-        String data_estado_atual = new String(TextInputEditDataEstadoAtual.getText().toString());
-        try {
-            format.setLenient(false);
-            data2 = format.parse(data_estado_atual);
-        } catch (ParseException e) {
-            TextInputEditDataEstadoAtual.setError(getString(R.string.CampoInválido));
-            TextInputEditDataEstadoAtual.requestFocus();
-            return;
-        }
-        //---------------------------------------------------------------------------------------
+        calendarViewDataEstadoAtual.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                String dataEstadoAtual = dayOfMonth+"/"+month+"/"+year;
+            }
+        });
+        //---------------------------------------------------------------------------------------*/
     }
 
 }
