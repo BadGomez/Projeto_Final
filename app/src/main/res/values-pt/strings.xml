@@ -79,4 +79,5 @@
     <string name="Descricao">Descrição:</string>
     <string name="Data_Noticia">Data:</string>
     <string name="Criar_Not">Criar</string>
+    <string name="noticias">imagemFuncoNoticias</string>
 </resources>

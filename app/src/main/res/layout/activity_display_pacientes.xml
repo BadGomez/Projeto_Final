@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:hint="@string/Paciente"
+        android:textColorHint="#000000"
         android:textSize="24sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,10 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:hint="@string/Botão_Criar_Doente"
         android:onClick="CriarDoente"
+        android:text="@string/Botão_Criar_Doente"
         android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/buttonEdit"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -36,9 +35,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:hint="@string/Botão_Editar"
+        android:text="@string/Botão_Editar"
         android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonRemove"
         app:layout_constraintStart_toEndOf="@+id/buttonInsert" />
@@ -49,19 +47,20 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:hint="@string/Botão_Eliminar"
+        android:text="@string/Botão_Eliminar"
         android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/buttonEdit"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecyclerViewPacientes"
-        android:layout_width="409dp"
-        android:layout_height="498dp"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/Paciente"
+        android:src="@drawable/pacientes"
         app:layout_constraintBottom_toTopOf="@+id/buttonEdit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
