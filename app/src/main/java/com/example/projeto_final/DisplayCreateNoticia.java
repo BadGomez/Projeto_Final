@@ -1,5 +1,6 @@
 package com.example.projeto_final;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CalendarView;
 import android.widget.Spinner;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -118,19 +120,14 @@ public class DisplayCreateNoticia extends AppCompatActivity {
             }
 
             //------------------------------------Data da Noticia-------------------------------
-            TextInputEditText TextInputEditTextDataNot = (TextInputEditText) findViewById(R.id.TextInputEditTextDataNot);
+            CalendarView calendarViewDataNoticia = (CalendarView) findViewById(R.id.calendarViewDataNoticia);
 
-            Date data = null;
-            String data_noticia = new String(TextInputEditTextDataNot.getText().toString());
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-            try {
-                format.setLenient(false);
-                data = format.parse(data_noticia);
-            } catch (ParseException e) {
-                TextInputEditTextDataNot.setError(getString(R.string.CampoInválido));
-                TextInputEditTextDataNot.requestFocus();
-                return;
-            }
+            calendarViewDataNoticia.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+                @Override
+                public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                    String dataEstadoAtual = dayOfMonth+"/"+month+"/"+year;
+                }
+            });
             //---------------------------------------------------------------------------------------
         }
     }
