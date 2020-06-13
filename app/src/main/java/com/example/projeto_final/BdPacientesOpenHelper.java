@@ -31,7 +31,11 @@ public class BdPacientesOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(db);
+        BdTabelaPaises tabelaPaises = new BdTabelaPaises(db);
+        BdTabelaNoticias tabelaNoticias = new BdTabelaNoticias(db);
         tabelaPacientes.criar();
+        tabelaPaises.criar();
+        tabelaNoticias.criar();
     }
 
     /**

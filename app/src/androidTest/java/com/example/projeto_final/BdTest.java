@@ -38,11 +38,11 @@ public class BdTest {
 
    private long inserePais (BdTabelaPaises tabelaPaises, Pais pais){
       long id = tabelaPaises.insert(Converte.paisToContentValues(pais));
-      assertEquals(-1, id);
+      assertNotEquals(-1, id);
       return id;
    }
 
-   private long inserePais(BdTabelaPaises tabelaPaises, String nome, Long numeroPopulacao){
+   private long inserePais(BdTabelaPaises tabelaPaises, String nome, String numeroPopulacao){
       Pais pais = new Pais();
         pais.setNome(nome);
         pais.setNumeroPopulacao(numeroPopulacao);
@@ -50,18 +50,77 @@ public class BdTest {
    }
 
    @Test
-    public void conseguesInserirPais(){
+    public void consegueInserirPais(){
       Context appContext = getTargetContext();
       BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
       SQLiteDatabase bd = openHelper.getWritableDatabase();
 
       BdTabelaPaises tabelaPaises = new BdTabelaPaises(bd);
-      inserePais(tabelaPaises, "Portugal", Long.valueOf(8181823)); //É assim que se guarda o valor Long?
+      inserePais(tabelaPaises, "Portugal", "9182233");
 
        bd.close();
    }
 
-  /* private long inserePaciente(BdTabelaPacientes tabelaPacientes, Paciente paciente) {
+   @Test
+    public void consegueLerPais(){
+      Context appContext = getTargetContext();
+      BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+      SQLiteDatabase bd = openHelper.getWritableDatabase();
+
+      BdTabelaPaises tabelaPaises = new BdTabelaPaises(bd);
+
+      Cursor cursor = tabelaPaises.query(BdTabelaPaises.TODOS_CAMPOS_PAIS, null, null, null, null, null);
+      int numeroPaises = cursor.getCount();
+      cursor.close();
+
+      inserePais(tabelaPaises, "Espanha", "2319302");
+
+      cursor = tabelaPaises.query(BdTabelaPaises.TODOS_CAMPOS_PAIS, null, null, null, null ,null);
+      assertEquals(numeroPaises + 1, cursor.getCount());
+      cursor.close();
+
+      bd.close();
+   }
+
+   @Test
+    public void consegueEditarPais(){
+       Context appContext = getTargetContext();
+       BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+       SQLiteDatabase bd = openHelper.getWritableDatabase();
+
+       BdTabelaPaises tabelaPaises = new BdTabelaPaises(bd);
+
+       Pais pais = new Pais();
+       pais.setNome("Alemanha");
+       pais.setNumeroPopulacao("91029239");
+
+       long id = inserePais(tabelaPaises, pais);
+
+       pais.setNome("Alemanha");
+       pais.setNumeroPopulacao("90129239");
+
+       int registosAlteradosPais = tabelaPaises.update(Converte.paisToContentValues(pais), BdTabelaPaises._ID + "=?", new String[]{String.valueOf(id)});
+       assertEquals(1, registosAlteradosPais);
+
+       bd.close();
+   }
+
+   @Test
+    public void conseguesApagarPais(){
+       Context appContext = getTargetContext();
+       BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+       SQLiteDatabase bd = openHelper.getWritableDatabase();
+       
+       BdTabelaPaises tabelaPaises = new BdTabelaPaises(bd);
+       long id = inserePais(tabelaPaises, "China", "20910202");
+
+       int registoApagadoPais = tabelaPaises.delete(BdTabelaPaises._ID + "=?", new String[]{String.valueOf(id)});
+       assertEquals(1, registoApagadoPais);
+
+       bd.close();
+   }
+/*
+   private long inserePaciente(BdTabelaPacientes tabelaPacientes, Paciente paciente) {
         long id = tabelaPacientes.insert(Converte.pacienteToContentValues(paciente));
         assertNotEquals(-1, id);
 

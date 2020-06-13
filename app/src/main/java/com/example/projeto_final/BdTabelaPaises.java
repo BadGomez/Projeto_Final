@@ -10,6 +10,7 @@ public class BdTabelaPaises implements BaseColumns {
     public static final String NOME_TABELA_PAISES = "pais";
     public static final String NOME_PAIS = "nome";
     public static final String NUMERO_POPULACAO = "numeroPopulacao";
+    public static final String[] TODOS_CAMPOS_PAIS = {_ID, NOME_PAIS, NUMERO_POPULACAO};
 
     private final SQLiteDatabase db;
 
@@ -22,8 +23,8 @@ public class BdTabelaPaises implements BaseColumns {
                 "CREATE TABLE " + NOME_TABELA_PAISES + "(" +
                         _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                         NOME_PAIS + " TEXT NOT NULL," +
-                        NUMERO_POPULACAO + " LONG" +
-                        ")");
+                        NUMERO_POPULACAO + " TEXT NOT NULL" +
+                ")");
     }
 
     public long insert(ContentValues values) {

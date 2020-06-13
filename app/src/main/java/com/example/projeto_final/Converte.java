@@ -15,7 +15,7 @@ public class Converte {
         Pais pais = new Pais();
             pais.setId(valores.getAsLong(BdTabelaPaises._ID));
             pais.setNome(valores.getAsString(BdTabelaPaises.NOME_PAIS));
-            pais.setNumeroPopulacao(valores.getAsLong(BdTabelaPaises.NUMERO_POPULACAO));
+            pais.setNumeroPopulacao(valores.getAsString(BdTabelaPaises.NUMERO_POPULACAO));
         return pais;
     }
 

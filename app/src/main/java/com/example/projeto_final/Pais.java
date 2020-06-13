@@ -4,7 +4,7 @@ public class Pais {
 
     private long id;
     private String nome;
-    private Long numeroPopulacao;
+    private String numeroPopulacao;
 
     public long getId() {
         return id;
@@ -22,11 +22,11 @@ public class Pais {
         this.nome = nome;
     }
 
-    public Long getNumeroPopulacao() {
+    public String getNumeroPopulacao() {
         return numeroPopulacao;
     }
 
-    public void setNumeroPopulacao(Long numeroPopulacao) {
+    public void setNumeroPopulacao(String numeroPopulacao) {
         this.numeroPopulacao = numeroPopulacao;
     }
 }
