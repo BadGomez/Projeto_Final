@@ -110,7 +110,7 @@ public class BdTest {
        Context appContext = getTargetContext();
        BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
        SQLiteDatabase bd = openHelper.getWritableDatabase();
-       
+
        BdTabelaPaises tabelaPaises = new BdTabelaPaises(bd);
        long id = inserePais(tabelaPaises, "China", "20910202");
 
@@ -119,18 +119,17 @@ public class BdTest {
 
        bd.close();
    }
+
 /*
-   private long inserePaciente(BdTabelaPacientes tabelaPacientes, Paciente paciente) {
-        long id = tabelaPacientes.insert(Converte.pacienteToContentValues(paciente));
-        assertNotEquals(-1, id);
+  private long inserePaciente(SQLiteDatabase bd, String nome, String descpais , String genero, String data_aniversario, String doente_cronico, String estado_atual, String data_estado_atual){
+      //todo: String pais tem que ser alterado (exprof tem descCategoria)
+      BdTabelaPaises tabelaPaises = new BdTabelaPaises(bd);
 
-        return id;
-    }
+      long idPais = inserePais(tabelaPaises, descpais);
 
-  private long inserePaciente(BdTabelaPacientes tabelaPacientes, String nome, String pais, String genero, String data_aniversario, String doente_cronico, String estado_atual, String data_estado_atual){
-      Paciente paciente = new Paciente();
+        Paciente paciente = new Paciente()
         paciente.setNome(nome);
-        paciente.setPais(pais);
+        paciente.setId(pais);
         paciente.setGenero(genero);
         paciente.setData_Aniversario(data_aniversario);
         paciente.setDoente_Cronico(doente_cronico);
