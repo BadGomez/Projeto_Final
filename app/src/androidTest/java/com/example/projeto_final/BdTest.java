@@ -36,7 +36,32 @@ public class BdTest {
        return InstrumentationRegistry.getInstrumentation().getTargetContext();
    }
 
-   private long inserePaciente(BdTabelaPacientes tabelaPacientes, Paciente paciente) {
+   private long inserePais (BdTabelaPaises tabelaPaises, Pais pais){
+      long id = tabelaPaises.insert(Converte.paisToContentValues(pais));
+      assertEquals(-1, id);
+      return id;
+   }
+
+   private long inserePais(BdTabelaPaises tabelaPaises, String nome, Long numeroPopulacao){
+      Pais pais = new Pais();
+        pais.setNome(nome);
+        pais.setNumeroPopulacao(numeroPopulacao);
+    return inserePais(tabelaPaises, pais);
+   }
+
+   @Test
+    public void conseguesInserirPais(){
+      Context appContext = getTargetContext();
+      BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+      SQLiteDatabase bd = openHelper.getWritableDatabase();
+
+      BdTabelaPaises tabelaPaises = new BdTabelaPaises(bd);
+      inserePais(tabelaPaises, "Portugal", Long.valueOf(8181823)); //É assim que se guarda o valor Long?
+
+       bd.close();
+   }
+
+  /* private long inserePaciente(BdTabelaPacientes tabelaPacientes, Paciente paciente) {
         long id = tabelaPacientes.insert(Converte.pacienteToContentValues(paciente));
         assertNotEquals(-1, id);
 
@@ -136,5 +161,5 @@ public class BdTest {
       assertEquals(1, registoApagado);
 
       bd.close();
-  }
+  } */
 }

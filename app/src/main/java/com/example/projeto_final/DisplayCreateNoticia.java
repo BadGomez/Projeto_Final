@@ -13,10 +13,7 @@ import android.widget.Spinner;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DisplayCreateNoticia extends AppCompatActivity {

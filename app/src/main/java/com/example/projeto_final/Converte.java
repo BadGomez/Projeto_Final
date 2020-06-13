@@ -4,6 +4,21 @@ import android.content.ContentValues;
 
 public class Converte {
 
+    public static ContentValues paisToContentValues(Pais pais){
+        ContentValues valores = new ContentValues();
+            valores.put(BdTabelaPaises.NOME_PAIS, pais.getNome());
+            valores.put(BdTabelaPaises.NUMERO_POPULACAO, pais.getNumeroPopulacao());
+        return valores;
+    }
+
+    public static Pais contentValuesToPais(ContentValues valores){
+        Pais pais = new Pais();
+            pais.setId(valores.getAsLong(BdTabelaPaises._ID));
+            pais.setNome(valores.getAsString(BdTabelaPaises.NOME_PAIS));
+            pais.setNumeroPopulacao(valores.getAsLong(BdTabelaPaises.NUMERO_POPULACAO));
+        return pais;
+    }
+
     public static ContentValues pacienteToContentValues(Paciente paciente){
         ContentValues valores = new ContentValues();
             valores.put(BdTabelaPacientes.NOME_PACIENTE,paciente.getNome());

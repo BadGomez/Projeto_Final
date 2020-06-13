@@ -8,6 +8,7 @@ import android.provider.BaseColumns;
 public class BdTabelaPaises implements BaseColumns {
 
     public static final String NOME_TABELA_PAISES = "pais";
+    public static final String NOME_PAIS = "nome";
     public static final String NUMERO_POPULACAO = "numeroPopulacao";
 
     private final SQLiteDatabase db;
@@ -20,7 +21,8 @@ public class BdTabelaPaises implements BaseColumns {
         db.execSQL(
                 "CREATE TABLE " + NOME_TABELA_PAISES + "(" +
                         _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        NUMERO_POPULACAO + " INTEGER" +
+                        NOME_PAIS + " TEXT NOT NULL," +
+                        NUMERO_POPULACAO + " LONG" +
                         ")");
     }
 
