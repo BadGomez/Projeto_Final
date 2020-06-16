@@ -23,7 +23,7 @@ public class BdTabelaPaises implements BaseColumns {
                 "CREATE TABLE " + NOME_TABELA_PAISES + "(" +
                         _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                         NOME_PAIS + " TEXT NOT NULL," +
-                        NUMERO_POPULACAO + " TEXT NOT NULL" +
+                        NUMERO_POPULACAO + " INTEGER" +
                 ")");
     }
 

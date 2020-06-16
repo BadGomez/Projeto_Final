@@ -34,7 +34,7 @@ public class DisplayCreateNoticia extends AppCompatActivity {
         Paises.add(getString(R.string.País_Albânia));
         Paises.add(getString(R.string.País_Alemanha));
         Paises.add(getString(R.string.País_Andorra));
-        Paises.add(getString(R.string.País_Armênia));
+        Paises.add(getString(R.string.País_Arménia));
         Paises.add(getString(R.string.País_Áustria));
         Paises.add(getString(R.string.País_Azerbaijão));
         Paises.add(getString(R.string.País_Bélgica));

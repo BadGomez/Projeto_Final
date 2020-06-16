@@ -42,7 +42,7 @@ public class BdTest {
       return id;
    }
 
-   private long inserePais(BdTabelaPaises tabelaPaises, String nome, String numeroPopulacao){
+   private long inserePais(BdTabelaPaises tabelaPaises, String nome, Integer numeroPopulacao){
       Pais pais = new Pais();
         pais.setNome(nome);
         pais.setNumeroPopulacao(numeroPopulacao);
@@ -56,7 +56,7 @@ public class BdTest {
       SQLiteDatabase bd = openHelper.getWritableDatabase();
 
       BdTabelaPaises tabelaPaises = new BdTabelaPaises(bd);
-      inserePais(tabelaPaises, "Portugal", "9182233");
+      inserePais(tabelaPaises, "Portugal", 9182233);
 
        bd.close();
    }
@@ -73,7 +73,7 @@ public class BdTest {
       int numeroPaises = cursor.getCount();
       cursor.close();
 
-      inserePais(tabelaPaises, "Espanha", "2319302");
+      inserePais(tabelaPaises, "Espanha", 2319302);
 
       cursor = tabelaPaises.query(BdTabelaPaises.TODOS_CAMPOS_PAIS, null, null, null, null ,null);
       assertEquals(numeroPaises + 1, cursor.getCount());
@@ -92,12 +92,12 @@ public class BdTest {
 
        Pais pais = new Pais();
        pais.setNome("Alemanha");
-       pais.setNumeroPopulacao("91029239");
+       pais.setNumeroPopulacao(91029239);
 
        long id = inserePais(tabelaPaises, pais);
 
        pais.setNome("Alemanha");
-       pais.setNumeroPopulacao("90129239");
+       pais.setNumeroPopulacao(90129239);
 
        int registosAlteradosPais = tabelaPaises.update(Converte.paisToContentValues(pais), BdTabelaPaises._ID + "=?", new String[]{String.valueOf(id)});
        assertEquals(1, registosAlteradosPais);
@@ -112,7 +112,7 @@ public class BdTest {
        SQLiteDatabase bd = openHelper.getWritableDatabase();
 
        BdTabelaPaises tabelaPaises = new BdTabelaPaises(bd);
-       long id = inserePais(tabelaPaises, "China", "20910202");
+       long id = inserePais(tabelaPaises, "China", 20910202);
 
        int registoApagadoPais = tabelaPaises.delete(BdTabelaPaises._ID + "=?", new String[]{String.valueOf(id)});
        assertEquals(1, registoApagadoPais);
