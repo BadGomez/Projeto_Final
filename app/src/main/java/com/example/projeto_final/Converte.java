@@ -47,7 +47,7 @@ public class Converte {
     public static ContentValues noticiaToContentValues(Noticia noticia){
         ContentValues valores = new ContentValues();
 
-        //todo: falta id pais
+        valores.put(BdTabelaNoticias.CAMPO_ID_PAIS, noticia.getId_Pais());
         valores.put(BdTabelaNoticias.TITULO_NOTICIA, noticia.getTitulo());
         valores.put(BdTabelaNoticias.DATA_NOTICIA, noticia.getData());
         valores.put(BdTabelaNoticias.CONTEUDO_NOTICIA, noticia.getConteudo());
@@ -58,7 +58,7 @@ public class Converte {
     public static Noticia contentValuesToNoticia(ContentValues valores){
         Noticia noticia = new Noticia();
 
-        //todo: falta id pais
+        noticia.setId_Pais(valores.getAsLong(BdTabelaNoticias.CAMPO_ID_PAIS));
         noticia.setId(valores.getAsLong(BdTabelaNoticias._ID));
         noticia.setTitulo(valores.getAsString(BdTabelaNoticias.TITULO_NOTICIA));
         noticia.setData(valores.getAsString(BdTabelaNoticias.DATA_NOTICIA));

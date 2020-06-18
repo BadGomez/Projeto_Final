@@ -5,7 +5,15 @@ public class Noticia {
     private String titulo;
     private String data;
     private String conteudo;
-    //todo: falta o id do pais correspondente desta noticia
+    private long id_Pais;
+
+    public long getId_Pais() {
+        return id_Pais;
+    }
+
+    public void setId_Pais(long id_Pais) {
+        this.id_Pais = id_Pais;
+    }
 
     public long getId() {
         return id;
