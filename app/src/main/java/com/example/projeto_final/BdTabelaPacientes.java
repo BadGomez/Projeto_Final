@@ -14,7 +14,20 @@ public class BdTabelaPacientes implements BaseColumns {
     public static final String DOENCA_CRONICA_PACIENTE = "doente_cronico";
     public static final String ESTADO_ATUAL_PACIENTE = "estado_atual";
     public static final String DATA_ESTADO_ATUAL_PACIENTE = "data_estado_atual";
-    public static final String[] TODOS_CAMPOS_PACIENTE = {_ID, NOME_PACIENTE, PAIS_PACIENTE, GENERO_PACIENTE, DATA_NASCIMENTO_PACIENTE, DOENCA_CRONICA_PACIENTE, ESTADO_ATUAL_PACIENTE, DATA_ESTADO_ATUAL_PACIENTE};
+    public static final String CAMPO_ID_PAIS = "id_pais";
+
+    public static final String CAMPO_ID_COMPLETO = NOME_TABELA + "." + _ID;
+    public static final String NOME_PACIENTE_COMPLETO = NOME_TABELA + "." + NOME_PACIENTE;
+    public static final String PAIS_PACIENTE_COMPLETO = NOME_TABELA + "." + PAIS_PACIENTE;
+    public static final String GENERO_PACIENTE_COMPLETO = NOME_TABELA + "." + GENERO_PACIENTE;
+    public static final String DATA_NASCIMENTO_PACIENTE_COMPLETO = NOME_TABELA + "." + DATA_NASCIMENTO_PACIENTE;
+    public static final String DOENCA_CRONICA_PACIENTE_COMPLETO = NOME_TABELA + "." + DOENCA_CRONICA_PACIENTE;
+    public static final String ESTADO_ATUAL_PACIENTE_COMPLETO = NOME_TABELA + "." + ESTADO_ATUAL_PACIENTE;
+    public static final String DATA_ESTADO_ATUAL_PACIENTE_COMPLETO = NOME_TABELA + "." + DATA_ESTADO_ATUAL_PACIENTE;
+    public static final String CAMPO_ID_PAIS_COMPLETO = NOME_TABELA + "." + CAMPO_ID_PAIS;
+    public static final String CAMPO_PAIS_COMPLETO = BdTabelaPaises.CAMPO_ID_COMPLETO + " AS " + PAIS_PACIENTE;
+
+    public static final String[] TODOS_CAMPOS_PACIENTES = {CAMPO_ID_COMPLETO, NOME_PACIENTE_COMPLETO, PAIS_PACIENTE_COMPLETO, GENERO_PACIENTE_COMPLETO, DATA_NASCIMENTO_PACIENTE_COMPLETO, DOENCA_CRONICA_PACIENTE_COMPLETO,ESTADO_ATUAL_PACIENTE_COMPLETO, DATA_ESTADO_ATUAL_PACIENTE_COMPLETO};
 
 
     private SQLiteDatabase db;
@@ -32,7 +45,9 @@ public class BdTabelaPacientes implements BaseColumns {
                         DATA_NASCIMENTO_PACIENTE + " TEXT NOT NULL," +
                         DOENCA_CRONICA_PACIENTE + " TEXT NOT NULL," +
                         ESTADO_ATUAL_PACIENTE + " TEXT NOT NULL," +
-                        DATA_ESTADO_ATUAL_PACIENTE + " TEXT NOT NULL" +
+                        DATA_ESTADO_ATUAL_PACIENTE + " TEXT NOT NULL," +
+                        "FOREIGN KEY (" + CAMPO_ID_PAIS + ") REFERENCES " +
+                        BdTabelaPaises.NOME_TABELA_PAISES + "(" + BdTabelaPaises._ID + ")" +
                 ")");
     }
 
