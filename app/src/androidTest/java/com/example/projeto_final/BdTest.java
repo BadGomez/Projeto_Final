@@ -138,7 +138,7 @@ public class BdTest {
        bd.close();
    }*/
 
-   private  long inserePaciente(BdTabelaPacientes tabelaPacientes, Paciente pacientes){
+   private long inserePaciente(BdTabelaPacientes tabelaPacientes, Paciente pacientes){
       long id = tabelaPacientes.insert(Converte.pacienteToContentValues(pacientes));
       assertNotEquals(-1, id);
       return id;
@@ -176,5 +176,79 @@ public class BdTest {
       assertEquals(registos + 1, cursor.getCount());
       cursor.close();
       db.close();
+    }
+
+    @Test
+    public void consegueAlterarDoente(){
+       Context appContext = getTargetContext();
+
+       BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+       SQLiteDatabase bdPaciente = openHelper.getWritableDatabase();
+
+       BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(bdPaciente);
+       BdTabelaPaises tabelaPaises = new BdTabelaPaises(bdPaciente);
+
+        Paciente paciente = new Paciente();
+        paciente.setNome("Antonio Marques");
+        paciente.setGenero("Masculino");
+        Integer id_pais = tabelaPaises.query(new String[]{"_id"}, "nome_pais = ?", new String[]{"Portugal"}, null,null,null).getColumnIndex("_id");
+        paciente.setId_Pais(id_pais);
+        paciente.setData_aniversario("15/02/2000");
+        paciente.setDoente_cronico("Sim");
+        paciente.setEstado_atual("Óbito");
+        paciente.setData_estado_atual("29/07/2020");
+
+        long id = inserePaciente(tabelaPacientes, paciente);
+
+        paciente.setNome("Antonio Marques Saraiva");
+        paciente.setGenero("Masculino");
+        id_pais = tabelaPaises.query(new String[]{"_id"}, "nome_pais = ?", new String[]{"Portugal"}, null,null,null).getColumnIndex("_id");
+        paciente.setId_Pais(id_pais);
+        paciente.setData_aniversario("15/02/2000");
+        paciente.setDoente_cronico("Sim");
+        paciente.setEstado_atual("Óbito");
+        paciente.setData_estado_atual("29/07/2020");
+
+        int registosAlterados = tabelaPacientes.update(Converte.pacienteToContentValues(paciente), BdTabelaPacientes._ID + "=?", new String[]{String.valueOf(id)});
+        assertEquals(1, registosAlterados);
+        bdPaciente.close();
+    }
+
+    @Test
+    public void consegueApagarPaciente(){
+       Context appContext = getTargetContext();
+
+       BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+       SQLiteDatabase db = openHelper.getWritableDatabase();
+
+       BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(db);
+       BdTabelaPaises tabelaPaises = new BdTabelaPaises(db);
+
+       Integer id_pais = tabelaPaises.query(new String[]{"_id"}, "nome_pais = ?", new String[]{"Portugal"}, null,null,null).getColumnIndex("_id");
+       long id = inserePaciente(tabelaPacientes, "Joana Marques", "Feminino", id_pais, "19/06/2000", "Não", "Infetada", "29/07/2020");
+       int registosApagados = tabelaPacientes.delete(BdTabelaPaises._ID + "=?", new String[]{String.valueOf(id)});
+       assertEquals(1, registosApagados);
+       db.close();
+    }
+
+    @Test
+    public void consegueLerPaciente(){
+       Context appContext = getTargetContext();
+
+       BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+       SQLiteDatabase db = openHelper.getWritableDatabase();
+       BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(db);
+       BdTabelaPaises tabelaPaises = new BdTabelaPaises(db);
+
+       Cursor cursor = tabelaPacientes.query(BdTabelaPacientes.TODOS_CAMPOS_PACIENTES, null,null,null,null,null);
+       int registos = cursor.getCount();
+       cursor.close();
+       Integer id_pais = tabelaPaises.query(new String[]{"_id"}, "nome_pais = ?", new String[]{"Portugal"}, null, null, null).getColumnIndex("_id");
+
+       inserePaciente(tabelaPacientes, "Ruben Almeida Gomes", "Masculino", id_pais, "12/12/2010", "Não", "Recuperado", "01/07/2020");
+       cursor = tabelaPacientes.query(BdTabelaPacientes.TODOS_CAMPOS_PACIENTES, null, null, null, null, null);
+       assertEquals(registos + 1, cursor.getCount());
+       cursor.close();
+       db.close();
     }
 }
