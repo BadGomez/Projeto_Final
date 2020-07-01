@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.os.Build;
@@ -145,7 +146,32 @@ public class ContentProvider extends android.content.ContentProvider {
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-        
+        SQLiteDatabase bd = openHelper.getReadableDatabase();
+
+        String id = uri.getLastPathSegment();
+
+        switch (getUriMatcher().match(uri)){
+            case URI_PAISES:
+                return new BdTabelaPaises(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
+
+            case URI_ID_PAISES:
+                return new BdTabelaPaises(bd).query(projection, BdTabelaPaises._ID + "=?", new String[]{ id }, null, null, sortOrder);
+
+            case URI_PACIENTES:
+                return new BdTabelaPacientes(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
+
+            case URI_ID_PACIENTES:
+                return new BdTabelaPacientes(bd).query(projection, BdTabelaPacientes._ID + "=?", new String[]{ id }, null, null, sortOrder);
+
+            case URI_NOTICIAS:
+                return new BdTabelaNoticias(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
+
+            case URI_ID_NOTICIAS:
+                return new BdTabelaNoticias(bd).query(projection, BdTabelaNoticias._ID + "=?", new String[] { id }, null, null, sortOrder);
+
+            default:
+                throw new UnsupportedOperationException("Endereço de query inválido: " + uri.getPath());
+        }
     }
 
     /**
@@ -169,7 +195,24 @@ public class ContentProvider extends android.content.ContentProvider {
     @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
-        return null;
+        int codigoUri = getUriMatcher().match(uri);
+
+        switch (codigoUri){
+            case URI_PAISES:
+                return CURSOR_DIR + PAISES;
+            case URI_ID_PAISES:
+                return CURSOR_ITEM + PAISES;
+            case URI_PACIENTES:
+                return CURSOR_DIR + PACIENTES;
+            case URI_ID_PACIENTES:
+                return CURSOR_ITEM + PACIENTES;
+            case URI_NOTICIAS:
+                return CURSOR_DIR + NOTICIAS;
+            case URI_ID_NOTICIAS:
+                return CURSOR_ITEM + NOTICIAS;
+            default:
+                return null;
+        }
     }
 
     /**
