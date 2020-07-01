@@ -163,12 +163,15 @@ public class BdTest {
 
       BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appcontext);
       SQLiteDatabase db = openHelper.getWritableDatabase();
+
       BdTabelaPaises tabelaPaises = new BdTabelaPaises(db);
       BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(db);
       getTableAsString(db, "pais");
+
       Cursor cursor = tabelaPacientes.query(BdTabelaPacientes.TODOS_CAMPOS_PACIENTES, null,null,null,null,null);
       int registos = cursor.getCount();
       cursor.close();
+
       Cursor cursor1 = tabelaPaises.query(new String[]{"_id"}, "nome_pais = ?", new String[]{"Portugal"}, null,null,null);
       Integer id_pais = cursor1.getColumnIndex("_id");
       inserePaciente(tabelaPacientes, "Rodrigo Afonso Almeida", "Masculino", id_pais, "20/03/1999", "Não", "Infetado", "01/07/2020");
@@ -226,7 +229,7 @@ public class BdTest {
 
        Integer id_pais = tabelaPaises.query(new String[]{"_id"}, "nome_pais = ?", new String[]{"Portugal"}, null,null,null).getColumnIndex("_id");
        long id = inserePaciente(tabelaPacientes, "Joana Marques", "Feminino", id_pais, "19/06/2000", "Não", "Infetada", "29/07/2020");
-       int registosApagados = tabelaPacientes.delete(BdTabelaPaises._ID + "=?", new String[]{String.valueOf(id)});
+       int registosApagados = tabelaPacientes.delete(BdTabelaPacientes._ID + "=?", new String[]{String.valueOf(id)});
        assertEquals(1, registosApagados);
        db.close();
     }
@@ -247,6 +250,114 @@ public class BdTest {
 
        inserePaciente(tabelaPacientes, "Ruben Almeida Gomes", "Masculino", id_pais, "12/12/2010", "Não", "Recuperado", "01/07/2020");
        cursor = tabelaPacientes.query(BdTabelaPacientes.TODOS_CAMPOS_PACIENTES, null, null, null, null, null);
+       assertEquals(registos + 1, cursor.getCount());
+       cursor.close();
+       db.close();
+    }
+
+    private long insereNoticia(BdTabelaNoticias tabelaNoticias, Noticia noticia){
+       long id = tabelaNoticias.insert(Converte.noticiaToContentValues(noticia));
+       assertNotEquals(-1, id);
+       return id;
+    }
+
+    private long insereNoticia(BdTabelaNoticias tabelaNoticias, String titulo, String data, String conteudo,Integer pais){
+       Noticia noticia = new Noticia();
+       noticia.setTitulo(titulo);
+       noticia.setData(data);
+       noticia.setConteudo(conteudo);
+       noticia.setId_Pais(pais);
+
+       return insereNoticia(tabelaNoticias, noticia);
+    }
+
+    @Test
+    public void consegueInserirNoticia(){
+       Context appcontext = getTargetContext();
+
+       BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appcontext);
+       SQLiteDatabase db = openHelper.getWritableDatabase();
+
+       BdTabelaPaises tabelaPaises = new BdTabelaPaises(db);
+       BdTabelaNoticias tabelaNoticias = new BdTabelaNoticias(db);
+       getTableAsString(db, "noticias");
+
+       Cursor cursor = tabelaNoticias.query(BdTabelaNoticias.TODOS_CAMPOS_NOTICIAS, null,null,null,null,null);
+       int registos = cursor.getCount();
+       cursor.close();
+
+       Cursor cursor1 = tabelaPaises.query(new String[]{"_id"}, "nome_pais = ?", new String[]{"Portugal"}, null, null, null);
+       Integer id_pais = cursor1.getColumnIndex("_id");
+
+       insereNoticia(tabelaNoticias, "Novos Infetados Em Portugal", "01/07/2020", "Foram diagnosticados novos 300 casos de COVID-19 em Portugal nas ultimas 24 horas.", id_pais);
+       cursor = tabelaNoticias.query(BdTabelaNoticias.TODOS_CAMPOS_NOTICIAS,null,null,null,null,null);
+       assertEquals(registos + 1, cursor.getCount());
+       cursor.close();
+       db.close();
+    }
+
+    @Test
+    public void consegueAlterarNoticia(){
+       Context appContext = getTargetContext();
+
+       BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+       SQLiteDatabase bdNoticia = openHelper.getWritableDatabase();
+
+       BdTabelaNoticias tabelaNoticias = new BdTabelaNoticias(bdNoticia);
+       BdTabelaPaises tabelaPaises = new BdTabelaPaises(bdNoticia);
+
+       Noticia noticia = new Noticia();
+       noticia.setTitulo("10 Mortos em Portugal");
+       noticia.setData("18/05/2020");
+       noticia.setConteudo("Faleceram 10 pessoas em Portugal no dia de hoje (18/05/2020) devido ao COVID-19");
+       Integer id_pais = tabelaPaises.query(new String[]{"_id"}, "nome_pais = ?", new String[]{"Portugal"}, null,null,null).getColumnIndex("_id");
+       noticia.setId_Pais(id_pais);
+
+       long id = insereNoticia(tabelaNoticias, noticia);
+
+       noticia.setTitulo("10 Óbitos em Portugal");
+       noticia.setData("18/05/2020");
+       noticia.setConteudo("Faleceram 10 pessoas em Portugal no dia de hoje (18/05/2020) devido ao COVID-19");
+       id_pais = tabelaPaises.query(new String[]{"_id"}, "nome_pais = ?", new String[]{"Portugal"}, null,null,null).getColumnIndex("_id");
+       noticia.setId_Pais(id_pais);
+
+       int registosAlterados = tabelaNoticias.update(Converte.noticiaToContentValues(noticia), BdTabelaNoticias._ID + "=?", new String[]{String.valueOf(id)});
+       assertEquals(1, registosAlterados);
+       bdNoticia.close();
+    }
+
+    @Test
+    public void consegueApagarNoticia(){
+       Context appContext = getTargetContext();
+       BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+       SQLiteDatabase db = openHelper.getWritableDatabase();
+
+       BdTabelaNoticias tabelaNoticias = new BdTabelaNoticias(db);
+       BdTabelaPaises tabelaPaises = new BdTabelaPaises(db);
+
+       Integer id_pais = tabelaPaises.query(new String[]{"_id"}, "nome_pais = ?", new String[]{"Portugal"}, null,null,null).getColumnIndex("_id");
+       long id  = insereNoticia(tabelaNoticias, "Diminuição de Casos de COVID-19", "10/02/2020", "Melhoria drástica no número de casos em Portugal", id_pais);
+       int registosApagados = tabelaNoticias.delete(BdTabelaNoticias._ID + "=?", new String[]{String.valueOf(id)});
+       assertEquals(1, registosApagados);
+       db.close();
+    }
+
+    @Test
+    public void consegueLerNoticia(){
+       Context appContext = getTargetContext();
+
+       BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+       SQLiteDatabase db = openHelper.getWritableDatabase();
+       BdTabelaNoticias tabelaNoticias = new BdTabelaNoticias(db);
+       BdTabelaPaises tabelaPaises = new BdTabelaPaises(db);
+
+       Cursor cursor = tabelaNoticias.query(BdTabelaNoticias.TODOS_CAMPOS_NOTICIAS,null,null,null,null,null);
+       int registos = cursor.getCount();
+       cursor.close();
+       Integer id_pais = tabelaPaises.query(new String[]{"_id"}, "nome_pais = ?", new String[]{"Portugal"}, null,null,null).getColumnIndex("_id");
+
+       insereNoticia(tabelaNoticias, "300 Recuperados", "01/07/2020", "300 novos recuperados em Portugal contando agora com 10000 recuperados no total", id_pais);
+       cursor = tabelaNoticias.query(BdTabelaNoticias.TODOS_CAMPOS_NOTICIAS, null,null,null,null,null);
        assertEquals(registos + 1, cursor.getCount());
        cursor.close();
        db.close();

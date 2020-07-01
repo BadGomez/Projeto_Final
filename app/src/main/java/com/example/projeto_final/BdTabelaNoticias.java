@@ -18,10 +18,10 @@ public class BdTabelaNoticias implements BaseColumns {
     public static final String TITULO_NOTICIA_COMPLETO = NOME_TABELA_NOTICIAS + "." + TITULO_NOTICIA;
     public static final String DATA_NOTICIA_COMPLETO = NOME_TABELA_NOTICIAS + "." + DATA_NOTICIA;
     public static final String CONTEUDO_NOTICIA_COMPLETO = NOME_TABELA_NOTICIAS + "." + CONTEUDO_NOTICIA;
-    public static final String CAMPO_ID_PAIS_COMPLETO = NOME_TABELA_NOTICIAS + "." + CAMPO_ID_PAIS;
+    //public static final String CAMPO_ID_PAIS_COMPLETO = NOME_TABELA_NOTICIAS + "." + CAMPO_ID_PAIS;
     public static final String CAMPO_PAIS_COMPLETO = BdTabelaPaises.CAMPO_ID_COMPLETO + " AS " +  PAIS_NOTICIA;
 
-    public static final String[] TODOS_CAMPOS_NOTICIAS = {CAMPO_ID_COMPLETO, PAIS_NOTICIA_COMPLETO, TITULO_NOTICIA_COMPLETO, DATA_NOTICIA_COMPLETO, CONTEUDO_NOTICIA_COMPLETO};
+    public static final String[] TODOS_CAMPOS_NOTICIAS = {CAMPO_ID_COMPLETO, TITULO_NOTICIA_COMPLETO, DATA_NOTICIA_COMPLETO, CONTEUDO_NOTICIA_COMPLETO};
 
     private final SQLiteDatabase db;
 
