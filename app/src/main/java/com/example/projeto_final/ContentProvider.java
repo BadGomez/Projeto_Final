@@ -1,6 +1,7 @@
 package com.example.projeto_final;
 
 import android.content.ContentValues;
+import android.content.UriMatcher;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -11,6 +12,44 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class ContentProvider extends android.content.ContentProvider {
+    private static final String AUTHORITY = "com.example.projeto_final";
+    private static final String PAISES = "pais";
+    private static final String PACIENTES = "pacientes";
+    private static final String NOTICIAS = "noticias";
+
+    private static final Uri ENDERECO_BASE = Uri.parse("content://" + AUTHORITY);
+    public static final Uri ENDERECO_PAISES = Uri.withAppendedPath(ENDERECO_BASE, PAISES);
+    public static final Uri ENDERECO_PACIENTES = Uri.withAppendedPath(ENDERECO_BASE, PACIENTES);
+    public static final Uri ENDERECO_NOTICIAS = Uri.withAppendedPath(ENDERECO_BASE, NOTICIAS);
+
+    private static final int URI_PAISES = 100;
+    private static final int URI_ID_PAISES = 101;
+
+    private static final int URI_PACIENTES = 200;
+    private static final int URI_ID_PACIENTES = 201;
+
+    private static final int URI_NOTICIAS = 300;
+    private static final int URI_ID_NOTICIAS = 301;
+
+    private static final String CURSOR_DIR = "vnd.android.cursor.dir/";
+    private static final String CURSOR_ITEM = "vnd.android.cursor.item/";
+
+    private BdPacientesOpenHelper openHelper;
+
+    private UriMatcher getUriMatcher(){
+        UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+
+        uriMatcher.addURI(AUTHORITY, PAISES, URI_PAISES);
+        uriMatcher.addURI(AUTHORITY, PAISES + "/#", URI_ID_PAISES);
+
+        uriMatcher.addURI(AUTHORITY, PACIENTES, URI_PACIENTES);
+        uriMatcher.addURI(AUTHORITY, PACIENTES + "/#", URI_ID_PACIENTES);
+
+        uriMatcher.addURI(AUTHORITY, NOTICIAS, URI_NOTICIAS);
+        uriMatcher.addURI(AUTHORITY, NOTICIAS + "/#", URI_ID_NOTICIAS);
+
+        return uriMatcher;
+    }
 
     /**
      * Implement this to initialize your content provider on startup.
@@ -39,7 +78,8 @@ public class ContentProvider extends android.content.ContentProvider {
      */
     @Override
     public boolean onCreate() {
-        return false;
+        openHelper = new BdPacientesOpenHelper(getContext());
+        return true;
     }
 
     /**
@@ -105,7 +145,7 @@ public class ContentProvider extends android.content.ContentProvider {
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-        return null;
+        
     }
 
     /**

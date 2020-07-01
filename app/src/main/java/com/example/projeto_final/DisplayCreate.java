@@ -127,7 +127,7 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
     private void mostrarDadosSpinnerPaises(Cursor data) {
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(
                 this,
-                android.R.layout.simple_list_item_1,
+                android.R.layout.simple_spinner_item,
                 data,
                 new String[]{BdTabelaPaises.NOME_PAIS},
                 new int[]{android.R.id.text1}
