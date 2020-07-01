@@ -4,7 +4,7 @@ public class Pais {
 
     private long id;
     private String nome;
-    private Integer numeroPopulacao;
+    private Integer numeroPopulacao = 0;
 
     public long getId() {
         return id;

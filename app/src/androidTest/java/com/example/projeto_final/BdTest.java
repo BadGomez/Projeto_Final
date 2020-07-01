@@ -22,12 +22,30 @@ public class BdTest {
       getTargetContext().deleteDatabase(BdPacientesOpenHelper.NOME_BASE_DADOS);
   }
 
+    public String getTableAsString(SQLiteDatabase db, String tableName) {
+        String tableString = String.format("Table %s:\n", tableName);
+        Cursor allRows = db.rawQuery("SELECT * FROM " + tableName, null);
+        if (allRows.moveToFirst()) {
+            String[] columnNames = allRows.getColumnNames();
+            do {
+                for (String name : columnNames) {
+                    tableString += String.format("%s: %s\n", name,
+                            allRows.getString(allRows.getColumnIndex(name)));
+                }
+                tableString += "\n";
+
+            } while (allRows.moveToNext());
+        }
+        return tableString;
+    }
+
   @Test
   public void consegueAbrirBaseDados(){
       Context appContext = getTargetContext();
 
       BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
       SQLiteDatabase bd = openHelper.getReadableDatabase();
+      getTableAsString(bd, "pais");
       assertTrue(bd.isOpen());
       bd.close();
   }
@@ -36,7 +54,7 @@ public class BdTest {
        return InstrumentationRegistry.getInstrumentation().getTargetContext();
    }
 
-   private long inserePais (BdTabelaPaises tabelaPaises, Pais pais){
+   /*private long inserePais (BdTabelaPaises tabelaPaises, Pais pais){
       long id = tabelaPaises.insert(Converte.paisToContentValues(pais));
       assertNotEquals(-1, id);
       return id;
@@ -118,106 +136,45 @@ public class BdTest {
        assertEquals(1, registoApagadoPais);
 
        bd.close();
+   }*/
+
+   private  long inserePaciente(BdTabelaPacientes tabelaPacientes, Paciente pacientes){
+      long id = tabelaPacientes.insert(Converte.pacienteToContentValues(pacientes));
+      assertNotEquals(-1, id);
+      return id;
    }
 
-/*
-  private long inserePaciente(SQLiteDatabase bd, String nome, String descpais , String genero, String data_aniversario, String doente_cronico, String estado_atual, String data_estado_atual){
-      //todo: String pais tem que ser alterado (exprof tem descCategoria)
-      BdTabelaPaises tabelaPaises = new BdTabelaPaises(bd);
+    private long inserePaciente(BdTabelaPacientes tabelaPacientes, String nome, String genero, Integer pais, String data_aniversario, String doente_cronico, String estado_atual, String data_estado_atual){
+      Paciente pacientes = new Paciente();
+      pacientes.setNome(nome);
+      pacientes.setGenero(genero);
+      pacientes.setId_Pais(pais);
+      pacientes.setData_aniversario(data_aniversario);
+      pacientes.setDoente_cronico(doente_cronico);
+      pacientes.setEstado_atual(estado_atual);
+      pacientes.setData_estado_atual(data_estado_atual);
 
-      long idPais = inserePais(tabelaPaises, descpais);
-
-        Paciente paciente = new Paciente()
-        paciente.setNome(nome);
-        paciente.setId(pais);
-        paciente.setGenero(genero);
-        paciente.setData_Aniversario(data_aniversario);
-        paciente.setDoente_Cronico(doente_cronico);
-        paciente.setEstado_Atual(estado_atual);
-        paciente.setData_Estado_Atual(data_estado_atual);
-      return inserePaciente(tabelaPacientes, paciente);
+      return inserePaciente(tabelaPacientes, pacientes);
   }
 
-  @Test
-  public void consegueInserirPaciente(){
-      Context appContext = getTargetContext();
-      BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
-      SQLiteDatabase bd = openHelper.getWritableDatabase();
+    @Test
+    public void consegueInserirPaciente(){
+      Context appcontext = getTargetContext();
 
-      BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(bd);
-      inserePaciente(tabelaPacientes, "Valter Rodrigues Simões", "Portugal", "Masculino", "11/05/2000", "Não", "Recuperado", "24/05/2020");
-
-      bd.close();
-  }
-
-  @Test
-    public void consegueLerPaciente(){
-      Context appContext = getTargetContext();
-      BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
-      SQLiteDatabase bd = openHelper.getWritableDatabase();
-
-      BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(bd);
-
-      Cursor cursor = tabelaPacientes.query(BdTabelaPacientes.TODOS_CAMPOS_PACIENTE, null, null, null, null, null);
-      int numeroPacientes = cursor.getCount();
+      BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appcontext);
+      SQLiteDatabase db = openHelper.getWritableDatabase();
+      BdTabelaPaises tabelaPaises = new BdTabelaPaises(db);
+      BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(db);
+      getTableAsString(db, "pais");
+      Cursor cursor = tabelaPacientes.query(BdTabelaPacientes.TODOS_CAMPOS_PACIENTES, null,null,null,null,null);
+      int registos = cursor.getCount();
       cursor.close();
-
-      inserePaciente(tabelaPacientes, "João António Faria", "Portugal" , "Masculino", "17/12/1987", "Sim", "Infetado", "02/06/2000");
-
-      cursor = tabelaPacientes.query(BdTabelaPacientes.TODOS_CAMPOS_PACIENTE, null, null, null, null, null);
-      assertEquals(numeroPacientes + 1, cursor.getCount());
+      Cursor cursor1 = tabelaPaises.query(new String[]{"_id"}, "nome_pais = ?", new String[]{"Portugal"}, null,null,null);
+      Integer id_pais = cursor1.getColumnIndex("_id");
+      inserePaciente(tabelaPacientes, "Rodrigo Afonso Almeida", "Masculino", id_pais, "20/03/1999", "Não", "Infetado", "01/07/2020");
+      cursor = tabelaPacientes.query(BdTabelaPacientes.TODOS_CAMPOS_PACIENTES, null,null,null,null,null);
+      assertEquals(registos + 1, cursor.getCount());
       cursor.close();
-
-      bd.close();
-  }
-
-  @Test
-    public void consegueEditarPaciente(){
-      Context appContext = getTargetContext();
-      BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
-      SQLiteDatabase bd = openHelper.getWritableDatabase();
-
-      BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(bd);
-
-      Paciente paciente = new Paciente();
-      paciente.setNome("Francisca Miranda Alonso");
-      paciente.setPais("Espanha");
-      paciente.setGenero("Feminino");
-      paciente.setData_Aniversario("09/08/1999");
-      paciente.setDoente_Cronico("Não");
-      paciente.setEstado_Atual("Infetado");
-      paciente.setData_Estado_Atual("03/06/2020");
-
-      long id = inserePaciente(tabelaPacientes, paciente);
-
-      paciente.setNome("Francisca Miranda Alonso");
-      paciente.setPais("Espanha");
-      paciente.setGenero("Feminino");
-      paciente.setData_Aniversario("09/08/1999");
-      paciente.setDoente_Cronico("Sim");
-      paciente.setEstado_Atual("Infetado");
-      paciente.setData_Estado_Atual("03/06/2020");
-
-      int registoAlterado = tabelaPacientes.update(Converte.pacienteToContentValues(paciente), BdTabelaPacientes._ID + "=?", new String[]{String.valueOf(id)});
-      assertEquals(1, registoAlterado);
-
-      bd.close();
-  }
-
-  @Test
-    public void consegueApagarPaciente(){
-      Context appContext = getTargetContext();
-
-      BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
-      SQLiteDatabase bd = openHelper.getWritableDatabase();
-
-      BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(bd);
-
-      long id = inserePaciente(tabelaPacientes, "Gonçalo Sebastião Saraiva","Portugal", "Masculino", "15/02/2000", "Não", "Recuperado", "25/05/2020");
-
-      int registoApagado = tabelaPacientes.delete(BdTabelaPacientes._ID + "=?", new String[]{String.valueOf(id)});
-      assertEquals(1, registoApagado);
-
-      bd.close();
-  } */
+      db.close();
+    }
 }

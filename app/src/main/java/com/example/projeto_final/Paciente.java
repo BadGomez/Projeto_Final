@@ -1,7 +1,7 @@
 package com.example.projeto_final;
 
 class Paciente {
-    private long id;
+    private long id = -1;
     private String nome;
     private String pais;
     private String genero;
@@ -9,7 +9,7 @@ class Paciente {
     private String doente_cronico;
     private String estado_atual;
     private String data_estado_atual;
-    private long id_Pais;
+    private Integer id_Pais;
 
     public long getId() {
         return id;
@@ -75,11 +75,11 @@ class Paciente {
         this.data_estado_atual = data_estado_atual;
     }
 
-    public long getId_Pais() {
+    public Integer getId_Pais() {
         return id_Pais;
     }
 
-    public void setId_Pais(long id_Pais) {
+    public void setId_Pais(Integer id_Pais) {
         this.id_Pais = id_Pais;
     }
 }

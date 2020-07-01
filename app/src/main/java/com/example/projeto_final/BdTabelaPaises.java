@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
 
 public class BdTabelaPaises implements BaseColumns {
     public static final String NOME_TABELA_PAISES = "pais";
-    public static final String NOME_PAIS = "nome";
+    public static final String NOME_PAIS = "nome_pais";
     public static final String NUMERO_POPULACAO = "numeroPopulacao";
     public static final String CAMPO_ID_COMPLETO = NOME_TABELA_PAISES + "." + _ID;
     public static final String[] TODOS_CAMPOS_PAIS = {_ID, NOME_PAIS, NUMERO_POPULACAO};
@@ -23,7 +23,7 @@ public class BdTabelaPaises implements BaseColumns {
                 "CREATE TABLE " + NOME_TABELA_PAISES + "(" +
                         _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                         NOME_PAIS + " TEXT NOT NULL," +
-                        NUMERO_POPULACAO + " INTEGER" +
+                        NUMERO_POPULACAO + " INTEGER NOT NULL " +
                 ")");
     }
 
