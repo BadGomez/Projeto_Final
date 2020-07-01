@@ -10,7 +10,7 @@ public class BdTabelaPaises implements BaseColumns {
     public static final String NOME_PAIS = "nome_pais";
     public static final String NUMERO_POPULACAO = "numeroPopulacao";
     public static final String CAMPO_ID_COMPLETO = NOME_TABELA_PAISES + "." + _ID;
-    public static final String[] TODOS_CAMPOS_PAIS = {_ID, NOME_PAIS, NUMERO_POPULACAO};
+    public static final String[] TODOS_CAMPOS_PAIS = {CAMPO_ID_COMPLETO, NOME_PAIS, NUMERO_POPULACAO};
 
     private final SQLiteDatabase db;
 

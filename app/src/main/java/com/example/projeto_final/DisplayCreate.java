@@ -6,9 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import androidx.loader.content.CursorLoader;
 
 import android.content.Context;
-import android.content.CursorLoader;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.CalendarView;
 import android.widget.CursorAdapter;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+
 
 import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
 
         Intent intentcriar = getIntent();
 
-     // ---------- Spinner de seleção do Género -----------   https://www.youtube.com/watch?v=4xKsWNmULr0
+        // ---------- Spinner de seleção do Género -----------   https://www.youtube.com/watch?v=4xKsWNmULr0
 
         Spinner dropdowngenero;
         dropdowngenero = (Spinner) findViewById(R.id.spinnerGenero);
@@ -44,7 +46,7 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
         genero.add(getString(R.string.GeneroF));
         genero.add(getString(R.string.GeneroM));
 
-        ArrayAdapter <String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, genero);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, genero);
 
         dropdowngenero.setAdapter(adapter);
 
@@ -59,9 +61,9 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
 
             }
         });
-     //------------------------------------------------------------
+        //------------------------------------------------------------
 
-     // ---------- Spinner de seleção de Doença Crónica -----------
+        // ---------- Spinner de seleção de Doença Crónica -----------
 
         Spinner dropdownDoencaCronica;
         dropdownDoencaCronica = (Spinner) findViewById(R.id.spinnerDoencaCronica);
@@ -70,7 +72,7 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
         DoencaCronica.add(getString(R.string.DoencaCronicaSim));
         DoencaCronica.add(getString(R.string.DoencaCronicaNao));
 
-        ArrayAdapter <String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, DoencaCronica);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, DoencaCronica);
 
         dropdownDoencaCronica.setAdapter(adapter2);
 
@@ -85,9 +87,9 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
 
             }
         });
-     //------------------------------------------------------------
+        //------------------------------------------------------------
 
-     // ---------- Spinner de seleção do Estado Atual -------------
+        // ---------- Spinner de seleção do Estado Atual -------------
 
         Spinner dropdownEstadoAtual;
         dropdownEstadoAtual = (Spinner) findViewById(R.id.spinnerEstadoAtual);
@@ -98,7 +100,7 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
         EstadoAtual.add(getString(R.string.EstadoCritico));
         EstadoAtual.add(getString(R.string.EstadoObito));
 
-        ArrayAdapter <String> adapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, EstadoAtual);
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, EstadoAtual);
 
         dropdownEstadoAtual.setAdapter(adapter3);
 
@@ -113,15 +115,15 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
 
             }
         });
-     //-----------------------------------------------------------------------
+        //-----------------------------------------------------------------------
 
-     // ---------- Spinner de seleção do País ---------------------
+        // ---------- Spinner de seleção do País ---------------------
 
         spinnerPais = (Spinner) findViewById(R.id.spinnerPaises);
         mostrarDadosSpinnerPaises(null);
 
-        LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_PAISES, null,null);
-     //------------------------------------------------------------------------------------
+        LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_PAISES, null , this);
+        //------------------------------------------------------------------------------------
     }
 
     private void mostrarDadosSpinnerPaises(Cursor data) {
@@ -133,6 +135,38 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
                 new int[]{android.R.id.text1}
         );
         spinnerPais.setAdapter(adapter);
+    }
+
+    public void NovoRegisto(View view) {
+        TextInputEditText TextInputEditNome = (TextInputEditText) findViewById(R.id.TextInputEditNome);
+        String nome = TextInputEditNome.getText().toString();
+
+        if (nome.length() < 1) {
+            TextInputEditNome.setError(getString(R.string.Campo_Obrigatorio));
+            TextInputEditNome.requestFocus();
+            return;
+        }
+
+        //------------------------------------Data de Aniversário------------------------------- https://www.youtube.com/watch?v=j_-dmsRWL3g
+        CalendarView calendarViewDataNascimento = (CalendarView) findViewById(R.id.calendarViewDataNascimento);
+
+        calendarViewDataNascimento.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                String dateAniversario = dayOfMonth + "/" + month + "/" + year;
+            }
+        });
+        //---------------------------------------------------------------------------------------
+        //------------------------------------Data Estado Atual----------------------------------
+        CalendarView calendarViewDataEstadoAtual = (CalendarView) findViewById(R.id.calendarViewDataEstadoAtual);
+
+        calendarViewDataEstadoAtual.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                String dataEstadoAtual = dayOfMonth + "/" + month + "/" + year;
+            }
+        });
+        //---------------------------------------------------------------------------------------*/
     }
 
     /**
@@ -147,7 +181,7 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        return null; //todo: completar apos fazer contentProvider
+        return new CursorLoader(this, ContentProviderFinal.ENDERECO_PAISES, BdTabelaPaises.TODOS_CAMPOS_PAIS, null, null, null);
     }
 
     /**
@@ -207,38 +241,6 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
      */
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-
-    }
-
-    public void NovoRegisto(View view){
-        TextInputEditText TextInputEditNome = (TextInputEditText) findViewById(R.id.TextInputEditNome);
-        String nome = TextInputEditNome.getText().toString();
-
-        if(nome.length() < 1){
-            TextInputEditNome.setError(getString(R.string.Campo_Obrigatorio));
-            TextInputEditNome.requestFocus();
-            return;
-        }
-
-        //------------------------------------Data de Aniversário------------------------------- https://www.youtube.com/watch?v=j_-dmsRWL3g
-        CalendarView calendarViewDataNascimento = (CalendarView) findViewById(R.id.calendarViewDataNascimento);
-
-        calendarViewDataNascimento.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                String dateAniversario = dayOfMonth+"/"+month+"/"+year;
-            }
-        });
-        //---------------------------------------------------------------------------------------
-        //------------------------------------Data Estado Atual----------------------------------
-        CalendarView calendarViewDataEstadoAtual = (CalendarView) findViewById(R.id.calendarViewDataEstadoAtual);
-
-        calendarViewDataEstadoAtual.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                String dataEstadoAtual = dayOfMonth+"/"+month+"/"+year;
-            }
-        });
-        //---------------------------------------------------------------------------------------*/
+        mostrarDadosSpinnerPaises(null);
     }
 }
