@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
@@ -231,7 +232,30 @@ public class ContentProvider extends android.content.ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-        return null;
+        SQLiteDatabase bd = openHelper.getWritableDatabase();
+
+        long id;
+
+        switch (getUriMatcher().match(uri)){
+            case URI_PAISES:
+                id = (new BdTabelaPaises(bd).insert(values));
+                break;
+
+            case URI_PACIENTES:
+                id = (new BdTabelaPacientes(bd).insert(values));
+                break;
+
+            case URI_NOTICIAS:
+                id = (new BdTabelaNoticias(bd).insert(values));
+                break;
+
+            default:
+                throw new UnsupportedOperationException("Endereço inser inválido: " + uri.getPath());
+        }
+        if (id == -1){
+            throw new SQLException("Não foi possivel inserir o registo: " + uri.getPath());
+        }
+        return Uri.withAppendedPath(uri, String.valueOf(id));
     }
 
     /**
@@ -257,7 +281,23 @@ public class ContentProvider extends android.content.ContentProvider {
      */
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+        SQLiteDatabase bd = openHelper.getWritableDatabase();
+
+        String id = uri.getLastPathSegment();
+
+        switch (getUriMatcher().match(uri)){
+            case URI_ID_PAISES:
+                return new BdTabelaPaises(bd).delete(BdTabelaPaises._ID + "=?", new String[]{ id });
+
+            case URI_ID_PACIENTES:
+                return new BdTabelaPacientes(bd).delete(BdTabelaPacientes._ID + "=?", new String[]{ id });
+
+            case URI_ID_NOTICIAS:
+                return new BdTabelaNoticias(bd).delete(BdTabelaNoticias._ID + "=?", new String[]{ id });
+
+            default:
+                throw new UnsupportedOperationException("Endereço delete inválido: " + uri.getPath());
+        }
     }
 
     /**
@@ -280,6 +320,22 @@ public class ContentProvider extends android.content.ContentProvider {
      */
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+        SQLiteDatabase bd = openHelper.getWritableDatabase();
+
+        String id = uri.getLastPathSegment();
+
+        switch (getUriMatcher().match(uri)){
+            case URI_ID_PAISES:
+                return new BdTabelaPaises(bd).update(values, BdTabelaPaises._ID + "=?", new String[]{ id });
+
+            case URI_ID_PACIENTES:
+                return new BdTabelaPacientes(bd).update(values, BdTabelaPacientes._ID + "=?", new String[] { id });
+
+            case URI_ID_NOTICIAS:
+                return new BdTabelaNoticias(bd).update(values, BdTabelaNoticias._ID + "=?", new String[] { id });
+
+            default:
+                throw new UnsupportedOperationException("Endereço de update inválido: " + uri.getPath());
+        }
     }
 }
