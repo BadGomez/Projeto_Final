@@ -10,6 +10,7 @@ public class BdPacientesOpenHelper extends SQLiteOpenHelper {
     public static final String NOME_BASE_DADOS = "TrabalhoFinal.db";
     public static final int VERSAO_BASE_DADOS =1;
     private final Context context;
+    private static final boolean DESENVOLVIMENTO = true;
 
     /**
      * Create a helper object to create, open, and/or manage a database.
@@ -42,8 +43,28 @@ public class BdPacientesOpenHelper extends SQLiteOpenHelper {
         tabelaNoticias.criar();
 
         preencheTabelaPaises(tabelaPaises);
+
+        if(DESENVOLVIMENTO){
+            seedData(db);
+        }
     }
 
+    private void seedData(SQLiteDatabase db){
+        BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(db);
+        BdTabelaPaises tabelaPaises = new BdTabelaPaises(db);
+
+        Paciente paciente = new Paciente();
+        paciente.setNome("Antonio Marques");
+        paciente.setGenero("Masculino");
+        Integer id_pais = tabelaPaises.query(new String[]{"_id"}, "nome_pais = ?", new String[]{"Portugal"}, null,null,null).getColumnIndex("_id");
+        paciente.setId_Pais(id_pais);
+        paciente.setData_aniversario("15/02/2000");
+        paciente.setDoente_cronico("Sim");
+        paciente.setEstado_atual("Óbito");
+        paciente.setData_estado_atual("29/07/2020");
+
+        tabelaPacientes.insert(Converte.pacienteToContentValues(paciente));
+    }
     private void preencheTabelaPaises(BdTabelaPaises tabelaPaises) {
 
         Pais pais = new Pais();
