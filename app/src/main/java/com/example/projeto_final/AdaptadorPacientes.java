@@ -13,10 +13,12 @@ public class AdaptadorPacientes extends RecyclerView.Adapter<AdaptadorPacientes.
     private final Context context;
     private Cursor cursor = null;
 
-    public AdaptadorPacientes(Context context){this.context = context;}
+    public AdaptadorPacientes(Context context) {
+        this.context = context;
+    }
 
-    public void setCursor(Cursor cursor){
-        if (cursor != this.cursor){
+    public void setCursor(Cursor cursor) {
+        if (cursor != this.cursor) {
             this.cursor = cursor;
             notifyDataSetChanged();
         }
@@ -24,49 +26,46 @@ public class AdaptadorPacientes extends RecyclerView.Adapter<AdaptadorPacientes.
 
     @NonNull
     @Override
-    public ViewHolderPaciente onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        View itemPaciente = LayoutInflater.from(context).inflate(R.layout.item_Paciente, parent, false);
+    public ViewHolderPaciente onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemPaciente = LayoutInflater.from(context).inflate(R.layout.item_paciente, parent, false);
         return new ViewHolderPaciente(itemPaciente);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolderPaciente holder, int position){
+    public void onBindViewHolder(@NonNull ViewHolderPaciente holder, int position) {
         cursor.moveToPosition(position);
-        PacienteModel pacienteModel = Converte.cursorToPaciente(cursor);
-        holder.setPacienteModel(pacienteModel);
+        Paciente pacienteModel = Converte.cursorToPaciente(cursor);
+        holder.setPaciente(pacienteModel);
     }
 
     @Override
-    public int getItemCount(){
-        if(cursor == null){
+    public int getItemCount() {
+        if (cursor == null) {
             return 0;
         }
         return cursor.getCount();
     }
 
-    public PacienteModel getPacienteSelecionado(){
-        if(viewHolderPacienteSelecionado == null) return null;
-        return viewHolderPacienteSelecionado.pacienteModel;
+    public Paciente getPacienteSelecionado() {
+        if (viewHolderPacienteSelecionado == null) return null;
+        return viewHolderPacienteSelecionado.paciente;
     }
 
-    private AdaptadorPacientes.viewHolderPaciente viewHolderPacienteSelecionado = null;
+    private AdaptadorPacientes.ViewHolderPaciente viewHolderPacienteSelecionado = null;
 
-    public class ViewHolderPaciente extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolderPaciente extends RecyclerView.ViewHolder{
+        private Paciente paciente = null;
 
-        //todo: layout realizado (textView)
 
         public ViewHolderPaciente(@NonNull View itemView) {
             super(itemView);
-        }
-
-        /**
-         * Called when a view has been clicked.
-         *
-         * @param v The view that was clicked.
-         */
-        @Override
-        public void onClick(View v) {
 
         }
+
+        public void setPaciente(Paciente paciente) {
+            this.paciente = paciente;
+        }
+
+
     }
 }

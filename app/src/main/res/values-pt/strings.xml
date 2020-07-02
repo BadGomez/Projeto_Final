@@ -80,4 +80,6 @@
     <string name="Data_Noticia">Data:</string>
     <string name="Criar_Not">Criar</string>
     <string name="noticias">imagemFuncoNoticias</string>
+    <string name="Name_name">Nome:</string>
+    <string name="Pais_pais">Nacionalidade:</string>
 </resources>

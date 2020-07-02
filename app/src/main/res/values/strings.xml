@@ -79,4 +79,6 @@
     <string name="Data_Noticia">Date:</string>
     <string name="Criar_Not">Create</string>
     <string name="noticias">imagemFuncoNoticias</string>
+    <string name="Name_name">Name:</string>
+    <string name="Pais_pais">Nationality:</string>
 </resources>
