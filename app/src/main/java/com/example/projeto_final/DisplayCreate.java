@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DisplayCreate extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
-    private Spinner spinnerPais;
+    private Spinner spinnerPaises;
     public static final int ID_CURSOR_LOADER_PAISES = 0;
 
     @Override
@@ -119,7 +119,7 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
 
         // ---------- Spinner de seleção do País ---------------------
 
-        spinnerPais = (Spinner) findViewById(R.id.spinnerPaises);
+        spinnerPaises = (Spinner) findViewById(R.id.spinnerPaises);
         mostrarDadosSpinnerPaises(null);
 
         LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_PAISES, null , this);
@@ -134,7 +134,7 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
                 new String[]{BdTabelaPaises.NOME_PAIS},
                 new int[]{android.R.id.text1}
         );
-        spinnerPais.setAdapter(adapter);
+        spinnerPaises.setAdapter(adapter);
     }
 
     public void NovoRegisto(View view) {

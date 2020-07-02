@@ -1,6 +1,7 @@
 package com.example.projeto_final;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 
 public class Converte {
 
@@ -68,4 +69,16 @@ public class Converte {
     }
 
 
+    public static Paciente cursorToPaciente(Cursor cursor) {
+        Paciente paciente = new Paciente();
+            paciente.setId(cursor.getInt(cursor.getColumnIndex(BdTabelaPacientes._ID)));
+            paciente.setNome(cursor.getString(cursor.getColumnIndex(BdTabelaPacientes.NOME_PACIENTE)));
+            paciente.setGenero(cursor.getString(cursor.getColumnIndex(BdTabelaPacientes.GENERO_PACIENTE)));
+            paciente.setData_aniversario(cursor.getString(cursor.getColumnIndex(BdTabelaPacientes.DATA_NASCIMENTO_PACIENTE)));
+            paciente.setId_Pais(cursor.getInt(cursor.getColumnIndex(BdTabelaPacientes.CAMPO_ID_PAIS)));
+            paciente.setDoente_cronico(cursor.getString(cursor.getColumnIndex(BdTabelaPacientes.DOENCA_CRONICA_PACIENTE)));
+            paciente.setEstado_atual(cursor.getString(cursor.getColumnIndex(BdTabelaPacientes.ESTADO_ATUAL_PACIENTE)));
+            paciente.setData_estado_atual(cursor.getString(cursor.getColumnIndex(BdTabelaPacientes.DATA_ESTADO_ATUAL_PACIENTE)));
+        return paciente;
+    }
 }
