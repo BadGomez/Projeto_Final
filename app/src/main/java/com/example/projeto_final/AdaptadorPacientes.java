@@ -65,7 +65,5 @@ public class AdaptadorPacientes extends RecyclerView.Adapter<AdaptadorPacientes.
         public void setPaciente(Paciente paciente) {
             this.paciente = paciente;
         }
-
-
     }
 }

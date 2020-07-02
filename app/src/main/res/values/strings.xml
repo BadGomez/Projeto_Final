@@ -81,4 +81,5 @@
     <string name="noticias">imagemFuncoNoticias</string>
     <string name="Name_name">Name:</string>
     <string name="Pais_pais">Nationality:</string>
+    <string name="Genero_genero">Gender:</string>
 </resources>
