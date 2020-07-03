@@ -82,4 +82,5 @@
     <string name="Name_name">Name:</string>
     <string name="Pais_pais">Nationality:</string>
     <string name="Genero_genero">Gender:</string>
+    <string name="PaisParaVer">Choose Country</string>
 </resources>

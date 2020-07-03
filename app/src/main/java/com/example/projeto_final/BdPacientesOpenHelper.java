@@ -56,7 +56,7 @@ public class BdPacientesOpenHelper extends SQLiteOpenHelper {
         Paciente paciente = new Paciente();
         paciente.setNome("Antonio Marques");
         paciente.setGenero("Masculino");
-        Integer id_pais = tabelaPaises.query(new String[]{"_id"}, "nome_pais = ?", new String[]{"Portugal"}, null,null,null).getColumnIndex("_id");
+        Integer id_pais = tabelaPaises.query(new String[]{"_id"}, "nome_pais =?", new String[]{"Portugal"}, null,null,null).getColumnIndex("_id");
         paciente.setId_Pais(id_pais);
         paciente.setData_aniversario("15/02/2000");
         paciente.setDoente_cronico("Sim");
@@ -64,7 +64,19 @@ public class BdPacientesOpenHelper extends SQLiteOpenHelper {
         paciente.setData_estado_atual("29/07/2020");
 
         tabelaPacientes.insert(Converte.pacienteToContentValues(paciente));
+
+        paciente.setNome("Maria Marques");
+        paciente.setGenero("Feminino");
+        id_pais = tabelaPaises.query(new String[]{"_id"}, "nome_pais =?", new String[]{"Espanha"}, null,null,null).getColumnIndex("_id");
+        paciente.setId_Pais(id_pais);
+        paciente.setData_aniversario("15/07/2000");
+        paciente.setDoente_cronico("Sim");
+        paciente.setEstado_atual("Infetado");
+        paciente.setData_estado_atual("29/07/2020");
+
+        tabelaPacientes.insert(Converte.pacienteToContentValues(paciente));
     }
+
     private void preencheTabelaPaises(BdTabelaPaises tabelaPaises) {
 
         Pais pais = new Pais();

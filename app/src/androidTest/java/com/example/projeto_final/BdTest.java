@@ -172,8 +172,11 @@ public class BdTest {
       int registos = cursor.getCount();
       cursor.close();
 
-      Cursor cursor1 = tabelaPaises.query(new String[]{"_id"}, "nome_pais = ?", new String[]{"Portugal"}, null,null,null);
-      Integer id_pais = cursor1.getColumnIndex("_id");
+      Cursor cursor1 = tabelaPaises.query(new String[]{"_id"}, "nome_pais =?", new String[]{"Portugal"}, null,null,null);
+      Integer id_pais = -1;
+      if(cursor1 != null && cursor1.moveToFirst())
+        id_pais = cursor1.getInt(cursor1.getColumnIndex("_id"));
+
       inserePaciente(tabelaPacientes, "Rodrigo Afonso Almeida", "Masculino", id_pais, "20/03/1999", "Não", "Infetado", "01/07/2020");
       cursor = tabelaPacientes.query(BdTabelaPacientes.TODOS_CAMPOS_PACIENTES, null,null,null,null,null);
       assertEquals(registos + 1, cursor.getCount());

@@ -20,6 +20,7 @@ import android.widget.CalendarView;
 import android.widget.CursorAdapter;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -36,6 +37,8 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
         setContentView(R.layout.activity_display_create);
 
         Intent intentcriar = getIntent();
+
+
 
         // ---------- Spinner de seleção do Género -----------   https://www.youtube.com/watch?v=4xKsWNmULr0
 
