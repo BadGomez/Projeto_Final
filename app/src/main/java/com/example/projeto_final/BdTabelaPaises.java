@@ -19,12 +19,13 @@ public class BdTabelaPaises implements BaseColumns {
     }
 
     public void criar() {
-        db.execSQL(
-                "CREATE TABLE " + NOME_TABELA_PAISES + "(" +
-                        _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        NOME_PAIS + " TEXT NOT NULL," +
-                        NUMERO_POPULACAO + " INTEGER NOT NULL " +
-                ")");
+        String sql = "CREATE TABLE " + NOME_TABELA_PAISES + "(" +
+                _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                NOME_PAIS + " TEXT NOT NULL," +
+                NUMERO_POPULACAO + " INTEGER NOT NULL " +
+                ")";
+
+        db.execSQL(sql);
     }
 
     public long insert(ContentValues values) {

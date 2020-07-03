@@ -54,7 +54,7 @@ public class BdTest {
        return InstrumentationRegistry.getInstrumentation().getTargetContext();
    }
 
-   /*private long inserePais (BdTabelaPaises tabelaPaises, Pais pais){
+   private long inserePais (BdTabelaPaises tabelaPaises, Pais pais){
       long id = tabelaPaises.insert(Converte.paisToContentValues(pais));
       assertNotEquals(-1, id);
       return id;
@@ -136,7 +136,7 @@ public class BdTest {
        assertEquals(1, registoApagadoPais);
 
        bd.close();
-   }*/
+   }
 
    private long inserePaciente(BdTabelaPacientes tabelaPacientes, Paciente pacientes){
       long id = tabelaPacientes.insert(Converte.pacienteToContentValues(pacientes));
@@ -144,7 +144,11 @@ public class BdTest {
       return id;
    }
 
-    private long inserePaciente(BdTabelaPacientes tabelaPacientes, String nome, String genero, Integer pais, String data_aniversario, String doente_cronico, String estado_atual, String data_estado_atual){
+    private long inserePaciente(SQLiteDatabase tabelaPacientes, String nome, String genero, Integer pais, String data_aniversario, String doente_cronico, String estado_atual, String data_estado_atual){
+      BdTabelaPaises tabelaPaises = new BdTabelaPaises(tabelaPacientes)
+
+      inserePais(tabelaPaises, "Portugal", 9182233);
+
       Paciente pacientes = new Paciente();
       pacientes.setNome(nome);
       pacientes.setGenero(genero);

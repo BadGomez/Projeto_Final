@@ -82,7 +82,7 @@ public class AdaptadorPacientes extends RecyclerView.Adapter<AdaptadorPacientes.
         public void setPaciente(Paciente paciente) {
             this.paciente = paciente;
             textViewNomePaciente.setText((paciente.getNome()));
-            textViewPaisPaciente.setText(String.valueOf(paciente.getPais()));
+            textViewPaisPaciente.setText(String.valueOf(paciente.getId_Pais()));
             textViewGeneroPaciente.setText(paciente.getGenero());
             textViewDataAnivPaciente.setText(paciente.getData_aniversario());
             textViewPacienteCronico.setText(paciente.getDoente_cronico());
