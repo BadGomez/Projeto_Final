@@ -56,7 +56,7 @@ public class BdPacientesOpenHelper extends SQLiteOpenHelper {
         Paciente paciente = new Paciente();
         paciente.setNome("Antonio Marques");
         paciente.setGenero("Masculino");
-        Integer id_pais = tabelaPaises.query(new String[]{"_id"}, "nome_pais =?", new String[]{"Portugal"}, null,null,null).getColumnIndex("_id");
+        Integer id_pais = tabelaPaises.query(new String[]{"_id"}, "nome_pais =?", new String[]{context.getString(R.string.País_Portugal)}, null,null,null).getColumnIndex("_id");
         paciente.setId_Pais(id_pais);
         paciente.setData_aniversario("15/02/2000");
         paciente.setDoente_cronico("Sim");

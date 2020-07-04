@@ -59,15 +59,14 @@ public class Converte {
     public static Noticia contentValuesToNoticia(ContentValues valores){
         Noticia noticia = new Noticia();
 
-        noticia.setId_Pais(valores.getAsLong(BdTabelaNoticias.CAMPO_ID_PAIS));
         noticia.setId(valores.getAsLong(BdTabelaNoticias._ID));
         noticia.setTitulo(valores.getAsString(BdTabelaNoticias.TITULO_NOTICIA));
+        noticia.setId_Pais(valores.getAsInteger(BdTabelaNoticias.CAMPO_ID_PAIS));
         noticia.setData(valores.getAsString(BdTabelaNoticias.DATA_NOTICIA));
         noticia.setConteudo(valores.getAsString(BdTabelaNoticias.CONTEUDO_NOTICIA));
 
         return noticia;
     }
-
 
     public static Paciente cursorToPaciente(Cursor cursor) {
         Paciente paciente = new Paciente();
@@ -80,5 +79,16 @@ public class Converte {
             paciente.setEstado_atual(cursor.getString(cursor.getColumnIndex(BdTabelaPacientes.ESTADO_ATUAL_PACIENTE)));
             paciente.setData_estado_atual(cursor.getString(cursor.getColumnIndex(BdTabelaPacientes.DATA_ESTADO_ATUAL_PACIENTE)));
         return paciente;
+    }
+
+
+    public static Noticia cursorToNoticia(Cursor cursor) {
+        Noticia noticia = new Noticia();
+            noticia.setId(cursor.getInt(cursor.getColumnIndex(BdTabelaNoticias._ID)));
+            noticia.setTitulo(cursor.getString(cursor.getColumnIndex(BdTabelaNoticias.TITULO_NOTICIA)));
+            noticia.setId_Pais(cursor.getInt(cursor.getColumnIndex(BdTabelaNoticias.CAMPO_ID_PAIS)));
+            noticia.setData(cursor.getString(cursor.getColumnIndex(BdTabelaNoticias.DATA_NOTICIA)));
+            noticia.setConteudo(cursor.getString(cursor.getColumnIndex(BdTabelaNoticias.CONTEUDO_NOTICIA)));
+        return noticia;
     }
 }

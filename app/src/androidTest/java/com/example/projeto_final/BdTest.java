@@ -1,9 +1,12 @@
 package com.example.projeto_final;
 
 import android.content.Context;
+import android.content.SearchRecentSuggestionsProvider;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import androidx.annotation.NonNull;
+import androidx.core.widget.TextViewCompat;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
@@ -187,7 +190,7 @@ public class BdTest {
       BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
       SQLiteDatabase bd = openHelper.getWritableDatabase();
 
-      long idPaciente = inserePaciente(bd, "Gonçalo Saraiva", "Masculino", "18/03/2000", "Sim", "Infetado", "04/07/2020", "França", 123123123);
+      long idPaciente = inserePaciente(bd, "Gonçalo Saraiva", "Masculino", "18/03/2000", "Sim", "Infetado", "04/07/2020", "França", 123123);
 
       BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(bd);
 
@@ -221,5 +224,100 @@ public class BdTest {
       assertEquals(1, registosEliminados);
 
       bd.close();
+  }
+
+  private long insereNoticia(SQLiteDatabase bd, String titulo, String data, String conteudo, String NomeNome_pais, int  Pop_populacao){
+    BdTabelaPaises tabelaPaises = new BdTabelaPaises(bd);
+
+    long idPais = inserePais(tabelaPaises, NomeNome_pais, Pop_populacao);
+
+    Noticia noticia = new Noticia();
+    noticia.setTitulo(titulo);
+    noticia.setId_Pais(idPais);
+    noticia.setData(data);
+    noticia.setConteudo(conteudo);
+
+    BdTabelaNoticias tabelaNoticias = new BdTabelaNoticias(bd);
+    long id = tabelaNoticias.insert(Converte.noticiaToContentValues(noticia));
+    assertNotEquals(-1, id);
+
+    return id;
+  }
+
+  @Test
+  public void consegueInserirNoticias(){
+    Context appContext = getTargetContext();
+
+    BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+    SQLiteDatabase bd = openHelper.getWritableDatabase();
+
+    insereNoticia(bd, "Trezentos Novos Casos de Covid", "04/07/2020", "Trezentos novos infetados em Lisboa", "Portugal", 123123123);
+
+    bd.close();
+  }
+
+  @Test
+  public void consegueLerNoticias(){
+    Context appContext = getTargetContext();
+
+    BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+    SQLiteDatabase bd = openHelper.getWritableDatabase();
+
+    BdTabelaNoticias tabelaNoticias = new BdTabelaNoticias(bd);
+
+    Cursor cursor = tabelaNoticias.query(BdTabelaNoticias.TODOS_CAMPOS_NOTICIAS, null,null,null,null,null);
+    int registos = cursor.getCount();
+    cursor.close();
+
+    insereNoticia(bd, "Dois novos óbitos", "04/07/2020", "Duas Pessoas faleceram no hospital de Lisboa com covid-19", "Portugal", 123123123);
+
+    cursor = tabelaNoticias.query(BdTabelaNoticias.TODOS_CAMPOS_NOTICIAS, null,null,null,null,null);
+    assertEquals(registos + 1, cursor.getCount());
+    cursor.close();
+
+    bd.close();
+  }
+
+  @Test
+  public void consegueAlterarNoticias(){
+    Context appContext = getTargetContext();
+
+    BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+    SQLiteDatabase bd = openHelper.getWritableDatabase();
+
+    long idNoticia = insereNoticia(bd, "Lar Infetado", "03/07/2020", "Novo lar em Vila Nova de Gaia com 30 idosos infetados", "Portugal", 1231231);
+
+    BdTabelaNoticias tabelaNoticias = new BdTabelaNoticias(bd);
+
+    Cursor cursor = tabelaNoticias.query(BdTabelaNoticias.TODOS_CAMPOS_NOTICIAS, BdTabelaNoticias.CAMPO_ID_COMPLETO + "=?", new String[]{ String.valueOf(idNoticia) }, null,null,null);
+    assertEquals(1, cursor.getCount());
+
+    assertTrue(cursor.moveToNext());
+    Noticia noticia = Converte.cursorToNoticia(cursor);
+    cursor.close();
+
+    assertEquals("Lar Infetado", noticia.getTitulo());
+
+    noticia.setTitulo("Lar com 30 idosos Infetados");
+    int registosAfetados = tabelaNoticias.update(Converte.noticiaToContentValues(noticia), BdTabelaNoticias.CAMPO_ID_COMPLETO + "=?", new String[]{String.valueOf(noticia.getId())});
+    assertEquals(1, registosAfetados);
+
+    bd.close();
+  }
+
+  @Test
+  public void consegueEliminarNoticia(){
+    Context appContext = getTargetContext();
+
+    BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+    SQLiteDatabase bd = openHelper.getWritableDatabase();
+
+    long id = insereNoticia(bd, "Dez novos infetados", "01/01/2020", "novos infetados", "Portugal", 1231232);
+
+    BdTabelaNoticias tabelaNoticias = new BdTabelaNoticias(bd);
+    int registosEliminados = tabelaNoticias.delete(BdTabelaNoticias._ID + "=?", new String[]{String.valueOf(id)});
+    assertEquals(1, registosEliminados);
+
+    bd.close();
   }
 }

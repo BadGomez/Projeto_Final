@@ -4,24 +4,27 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
+import android.text.TextUtils;
+
+import java.util.Arrays;
 
 public class BdTabelaNoticias implements BaseColumns {
     public static final String NOME_TABELA_NOTICIAS = "noticias";
-    public static final String PAIS_NOTICIA = "paisNoticia";
+    //public static final String PAIS_NOTICIA = "paisNoticia";
     public static final String TITULO_NOTICIA = "titulo";
     public static final String DATA_NOTICIA = "data";
     public static final String CONTEUDO_NOTICIA = "conteudo";
     public static final String CAMPO_ID_PAIS ="id_pais";
 
     public static final String CAMPO_ID_COMPLETO = NOME_TABELA_NOTICIAS + "." + _ID;
-    public static final String PAIS_NOTICIA_COMPLETO = NOME_TABELA_NOTICIAS + "." + PAIS_NOTICIA;
+    //public static final String PAIS_NOTICIA_COMPLETO = NOME_TABELA_NOTICIAS + "." + PAIS_NOTICIA;
     public static final String TITULO_NOTICIA_COMPLETO = NOME_TABELA_NOTICIAS + "." + TITULO_NOTICIA;
     public static final String DATA_NOTICIA_COMPLETO = NOME_TABELA_NOTICIAS + "." + DATA_NOTICIA;
     public static final String CONTEUDO_NOTICIA_COMPLETO = NOME_TABELA_NOTICIAS + "." + CONTEUDO_NOTICIA;
-    //public static final String CAMPO_ID_PAIS_COMPLETO = NOME_TABELA_NOTICIAS + "." + CAMPO_ID_PAIS;
-    public static final String CAMPO_PAIS_COMPLETO = BdTabelaPaises.CAMPO_ID_COMPLETO + " AS " +  PAIS_NOTICIA;
+    public static final String CAMPO_ID_PAIS_COMPLETO = NOME_TABELA_NOTICIAS + "." + CAMPO_ID_PAIS;
+    public static final String CAMPO_PAIS_COMPLETO = BdTabelaPaises.NOME_TABELA_PAISES + "." +  BdTabelaPaises.NOME_PAIS;
 
-    public static final String[] TODOS_CAMPOS_NOTICIAS = {CAMPO_ID_COMPLETO, TITULO_NOTICIA_COMPLETO, DATA_NOTICIA_COMPLETO, CONTEUDO_NOTICIA_COMPLETO};
+    public static final String[] TODOS_CAMPOS_NOTICIAS = {CAMPO_PAIS_COMPLETO, CAMPO_ID_COMPLETO, TITULO_NOTICIA_COMPLETO, DATA_NOTICIA_COMPLETO, CONTEUDO_NOTICIA_COMPLETO, CAMPO_ID_PAIS_COMPLETO};
 
     private final SQLiteDatabase db;
 
@@ -49,7 +52,34 @@ public class BdTabelaNoticias implements BaseColumns {
     public Cursor query(String[] columns, String selection,
                         String[] selectionArgs, String groupBy, String having,
                         String orderBy) {
-        return db.query(NOME_TABELA_NOTICIAS, columns, selection, selectionArgs, groupBy, having, orderBy);
+
+        if (!Arrays.asList(columns).contains(CAMPO_PAIS_COMPLETO)) {
+            return db.query(NOME_TABELA_NOTICIAS, columns, selection, selectionArgs, groupBy, having, orderBy);
+        }
+
+        String campos = TextUtils.join(",", columns);
+
+        String sql = "SELECT " + campos;
+        sql += " FROM " + NOME_TABELA_NOTICIAS + " INNER JOIN " + BdTabelaPaises.NOME_TABELA_PAISES;
+        sql += " ON " + CAMPO_ID_PAIS_COMPLETO + "=" + BdTabelaPaises.CAMPO_ID_COMPLETO;
+
+        if (selection != null) {
+            sql += " WHERE " + selection;
+        }
+
+        if (groupBy != null) {
+            sql += " GROUP BY " + groupBy;
+
+            if (having != null) {
+                sql += " HAVING " + having;
+            }
+        }
+
+        if (orderBy != null) {
+            sql += " ORDER BY " + orderBy;
+        }
+
+        return db.rawQuery(sql, selectionArgs);
     }
 
     public int update(ContentValues values, String whereClause, String[] whereArgs) {

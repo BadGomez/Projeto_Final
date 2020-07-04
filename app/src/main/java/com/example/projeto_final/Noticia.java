@@ -1,19 +1,11 @@
 package com.example.projeto_final;
 
 public class Noticia {
-    private long id;
+    private long id = -1;
     private String titulo;
     private String data;
     private String conteudo;
-    private long id_Pais;
-
-    public long getId_Pais() {
-        return id_Pais;
-    }
-
-    public void setId_Pais(long id_Pais) {
-        this.id_Pais = id_Pais;
-    }
+    private long id_Pais = -1;
 
     public long getId() {
         return id;
@@ -45,5 +37,13 @@ public class Noticia {
 
     public void setConteudo(String conteudo) {
         this.conteudo = conteudo;
+    }
+
+    public long getId_Pais() {
+        return id_Pais;
+    }
+
+    public void setId_Pais(long id_Pais) {
+        this.id_Pais = id_Pais;
     }
 }
