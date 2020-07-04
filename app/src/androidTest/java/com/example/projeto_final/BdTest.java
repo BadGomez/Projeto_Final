@@ -125,4 +125,101 @@ public class BdTest {
 
     bd.close();
     }
+
+    private long inserePaciente(SQLiteDatabase bd, String nome, String genero, String data_aniversario, String doente_cronico, String estado_atual, String data_estado_atual, String NomeNome_pais, int  Pop_populacao){
+      BdTabelaPaises tabelaPaises = new BdTabelaPaises(bd);
+
+      long idPais = inserePais(tabelaPaises, NomeNome_pais, Pop_populacao);
+
+      Paciente paciente = new Paciente();
+      paciente.setNome(nome);
+      paciente.setId_Pais(idPais);
+      paciente.setGenero(genero);
+      paciente.setData_aniversario(data_aniversario);
+      paciente.setDoente_cronico(doente_cronico);
+      paciente.setEstado_atual(estado_atual);
+      paciente.setData_estado_atual(data_estado_atual);
+
+      BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(bd);
+      long id = tabelaPacientes.insert(Converte.pacienteToContentValues(paciente));
+      assertNotEquals(-1, id);
+
+      return id;
+    }
+
+    @Test
+    public void consegueInserirPacientes(){
+      Context appContext = getTargetContext();
+
+      BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+      SQLiteDatabase bd = openHelper.getWritableDatabase();
+
+      inserePaciente(bd, "Valter Simões", "Masculino", "11/05/2000", "Não", "Recuperado", "20/05/2020", "Portugal", 10231230);
+
+      bd.close();
+    }
+
+    @Test
+    public void consegueLerPacientes(){
+      Context appContext = getTargetContext();
+      BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+      SQLiteDatabase bd = openHelper.getWritableDatabase();
+
+      BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(bd);
+
+      Cursor cursor = tabelaPacientes.query(BdTabelaPacientes.TODOS_CAMPOS_PACIENTES, null,null,null,null,null);
+      int registos = cursor.getCount();
+      cursor.close();
+
+      inserePaciente(bd, "Miguel Durães", "Masculino", "31/07/1999", "Não", "Recuperado", "04/07/2020", "Espanha", 9103821);
+
+      cursor = tabelaPacientes.query(BdTabelaPacientes.TODOS_CAMPOS_PACIENTES, null,null,null,null,null);
+      assertEquals(registos + 1, cursor.getCount());
+      cursor.close();
+
+      bd.close();
+    }
+
+    @Test
+    public void consegueAlterarPaciente(){
+      Context appContext = getTargetContext();
+
+      BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+      SQLiteDatabase bd = openHelper.getWritableDatabase();
+
+      long idPaciente = inserePaciente(bd, "Gonçalo Saraiva", "Masculino", "18/03/2000", "Sim", "Infetado", "04/07/2020", "França", 123123123);
+
+      BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(bd);
+
+      Cursor cursor = tabelaPacientes.query(BdTabelaPacientes.TODOS_CAMPOS_PACIENTES, BdTabelaPacientes.CAMPO_ID_COMPLETO + "=?", new String[]{ String.valueOf(idPaciente)}, null,null,null);
+      assertEquals(1, cursor.getCount());
+
+      assertTrue(cursor.moveToNext());
+      Paciente paciente = Converte.cursorToPaciente(cursor);
+      cursor.close();
+
+      assertEquals("Gonçalo Saraiva", paciente.getNome());
+
+      paciente.setNome("Gonçalo Sebastião Saraiva");
+      int registosAfetados = tabelaPacientes.update(Converte.pacienteToContentValues(paciente), BdTabelaPacientes.CAMPO_ID_COMPLETO + "=?", new String[]{String.valueOf(paciente.getId())});
+      assertEquals(1, registosAfetados);
+
+      bd.close();
+    }
+
+    @Test
+    public void consegueEliminarPacientes(){
+      Context appContext = getTargetContext();
+
+      BdPacientesOpenHelper openHelper = new BdPacientesOpenHelper(appContext);
+      SQLiteDatabase bd = openHelper.getWritableDatabase();
+
+      long id = inserePaciente(bd, "Maria Almeida", "Feminino", "01/04/2000", "Sim", "Infetado", "04/07/2020", "Portugal", 3103123);
+
+      BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(bd);
+      int registosEliminados = tabelaPacientes.delete(BdTabelaPacientes._ID + "=?", new String[]{String.valueOf(id)});
+      assertEquals(1, registosEliminados);
+
+      bd.close();
+  }
 }
