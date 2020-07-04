@@ -7,7 +7,7 @@ public class Converte {
 
     public static ContentValues paisToContentValues(Pais pais){
         ContentValues valores = new ContentValues();
-            valores.put(BdTabelaPaises.NOME_PAIS, pais.getNome());
+            valores.put(BdTabelaPaises.NOME_PAIS, pais.getNome_pais());
             valores.put(BdTabelaPaises.NUMERO_POPULACAO, pais.getNumeroPopulacao());
         return valores;
     }
@@ -15,7 +15,7 @@ public class Converte {
     public static Pais contentValuesToPais(ContentValues valores){
         Pais pais = new Pais();
             pais.setId(valores.getAsLong(BdTabelaPaises._ID));
-            pais.setNome(valores.getAsString(BdTabelaPaises.NOME_PAIS));
+            pais.setNome_pais(valores.getAsString(BdTabelaPaises.NOME_PAIS));
             pais.setNumeroPopulacao(valores.getAsInteger(BdTabelaPaises.NUMERO_POPULACAO));
         return pais;
     }
