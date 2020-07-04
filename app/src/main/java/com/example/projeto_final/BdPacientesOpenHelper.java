@@ -1,6 +1,7 @@
 package com.example.projeto_final;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -50,30 +51,38 @@ public class BdPacientesOpenHelper extends SQLiteOpenHelper {
     }
 
     private void seedData(SQLiteDatabase db){
+       BdTabelaPaises tabelaPaises = new BdTabelaPaises(db);
+
+       Pais pais = new Pais();
+       pais.setNome_pais("China");
+       pais.setNumeroPopulacao(123321);
+       long idPaisChina = tabelaPaises.insert(Converte.paisToContentValues(pais));
+
+        pais = new Pais();
+        pais.setNome_pais("Japão");
+        pais.setNumeroPopulacao(21);
+        long idPaisJapao = tabelaPaises.insert(Converte.paisToContentValues(pais));
+
         BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(db);
-        BdTabelaPaises tabelaPaises = new BdTabelaPaises(db);
 
         Paciente paciente = new Paciente();
-        paciente.setNome("Antonio Marques");
+        paciente.setNome("Valter Simões");
+        paciente.setData_aniversario("11/05/2000");
         paciente.setGenero("Masculino");
-        Integer id_pais = tabelaPaises.query(new String[]{"_id"}, "nome_pais =?", new String[]{context.getString(R.string.País_Portugal)}, null,null,null).getColumnIndex("_id");
-        paciente.setId_Pais(id_pais);
-        paciente.setData_aniversario("15/02/2000");
-        paciente.setDoente_cronico("Sim");
-        paciente.setEstado_atual("Óbito");
-        paciente.setData_estado_atual("29/07/2020");
-
+        paciente.setEstado_atual("Recuperado");
+        paciente.setData_estado_atual("03/03/2020");
+        paciente.setDoente_cronico("Não");
+        paciente.setId_Pais(idPaisChina);
         tabelaPacientes.insert(Converte.pacienteToContentValues(paciente));
 
-        paciente.setNome("Maria Marques");
+        paciente = new Paciente();
+        paciente.setNome("Joana Santos");
+        paciente.setData_aniversario("03/07/2001");
         paciente.setGenero("Feminino");
-        id_pais = tabelaPaises.query(new String[]{"_id"}, "nome_pais =?", new String[]{"Spain"}, null,null,null).getColumnIndex("_id");
-        paciente.setId_Pais(id_pais);
-        paciente.setData_aniversario("15/07/2000");
+        paciente.setEstado_atual("Infetada");
+        paciente.setData_estado_atual("07/07/2020");
         paciente.setDoente_cronico("Sim");
-        paciente.setEstado_atual("Infetado");
-        paciente.setData_estado_atual("29/07/2020");
-
+        paciente.setId_Pais(idPaisJapao);
         tabelaPacientes.insert(Converte.pacienteToContentValues(paciente));
     }
 

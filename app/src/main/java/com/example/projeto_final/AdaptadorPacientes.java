@@ -36,8 +36,8 @@ public class AdaptadorPacientes extends RecyclerView.Adapter<AdaptadorPacientes.
     @Override
     public void onBindViewHolder(@NonNull ViewHolderPaciente holder, int position) {
         cursor.moveToPosition(position);
-        Paciente pacienteModel = Converte.cursorToPaciente(cursor);
-        holder.setPaciente(pacienteModel);
+        Paciente paciente = Converte.cursorToPaciente(cursor);
+        holder.setPaciente(paciente);
     }
 
     @Override
@@ -53,9 +53,9 @@ public class AdaptadorPacientes extends RecyclerView.Adapter<AdaptadorPacientes.
         return viewHolderPacienteSelecionado.paciente;
     }
 
-    private AdaptadorPacientes.ViewHolderPaciente viewHolderPacienteSelecionado = null;
+    private ViewHolderPaciente viewHolderPacienteSelecionado = null;
 
-    public class ViewHolderPaciente extends RecyclerView.ViewHolder{
+    public class ViewHolderPaciente extends RecyclerView.ViewHolder implements View.OnClickListener{
         private Paciente paciente = null;
 
         private final TextView textViewNomePaciente;
@@ -77,6 +77,7 @@ public class AdaptadorPacientes extends RecyclerView.Adapter<AdaptadorPacientes.
             textViewPacienteCronico = (TextView)itemView.findViewById(R.id.textViewPacienteCronico);
             textViewEstadoAtual = (TextView)itemView.findViewById(R.id.textViewEstadoAtual);
             textViewDataestadaAtual = (TextView)itemView.findViewById(R.id.textViewDataEstadoAtual);
+            itemView.setOnClickListener(this);
         }
 
         public void setPaciente(Paciente paciente) {
@@ -89,5 +90,36 @@ public class AdaptadorPacientes extends RecyclerView.Adapter<AdaptadorPacientes.
             textViewEstadoAtual.setText(paciente.getEstado_atual());
             textViewDataestadaAtual.setText(paciente.getData_estado_atual());
         }
+
+        /**
+         * Called when a view has been clicked.
+         *
+         * @param v The view that was clicked.
+         */
+        @Override
+        public void onClick(View v) {
+            if(viewHolderPacienteSelecionado == this){
+                return;
+            }
+
+            if(viewHolderPacienteSelecionado != null){
+                viewHolderPacienteSelecionado.desSeleciona();
+            }
+
+            viewHolderPacienteSelecionado = this;
+            seleciona();
+
+            DisplayPacientes displayPacientes = (DisplayPacientes) AdaptadorPacientes.this.context;
+
+        }
+
+        private void desSeleciona() {
+            itemView.setBackgroundResource(android.R.color.white);
+        }
+
+        private void seleciona(){
+            itemView.setBackgroundResource(R.color.colorAccent);
+        }
+
     }
 }
