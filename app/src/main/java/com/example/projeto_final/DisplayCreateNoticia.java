@@ -94,16 +94,19 @@ public class DisplayCreateNoticia extends AppCompatActivity implements LoaderMan
 
         Noticia noticia = new Noticia();
         noticia.setTitulo(Titulo);
-        noticia.setData("01/02/2020");
+        noticia.setData("01/02/2020"); //todo: como meter data do calendarView?
         noticia.setConteudo(DescicaoNOT);
         noticia.setId_Pais(idPais);
-        
+
         try{
             this.getContentResolver().insert(ContentProviderFinal.ENDERECO_NOTICIAS, Converte.noticiaToContentValues(noticia));
             Toast.makeText(this, "Noticia Inserida", Toast.LENGTH_SHORT).show();
         }catch (Exception e){
             Toast.makeText(this, "Erro de Inserção", Toast.LENGTH_SHORT).show();
         }
+
+        Intent intentNoticias = new Intent(this, DisplayNoticias.class);
+        startActivity(intentNoticias);
     }
 
     /**

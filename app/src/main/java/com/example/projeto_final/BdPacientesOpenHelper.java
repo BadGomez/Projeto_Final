@@ -11,7 +11,7 @@ public class BdPacientesOpenHelper extends SQLiteOpenHelper {
     public static final String NOME_BASE_DADOS = "TrabalhoFinal.db";
     public static final int VERSAO_BASE_DADOS =1;
     private final Context context;
-    private static final boolean DESENVOLVIMENTO = true;
+    private static final boolean DESENVOLVIMENTO = false;
 
     /**
      * Create a helper object to create, open, and/or manage a database.
