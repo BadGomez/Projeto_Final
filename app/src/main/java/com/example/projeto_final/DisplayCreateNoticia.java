@@ -13,6 +13,8 @@ import android.widget.CalendarView;
 import android.widget.CursorAdapter;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
+
 import androidx.loader.content.CursorLoader;
 
 import androidx.fragment.app.FragmentManager;
@@ -85,7 +87,24 @@ public class DisplayCreateNoticia extends AppCompatActivity implements LoaderMan
                 }
             });
             //---------------------------------------------------------------------------------------
+
+        //Criar Noticia
+
+        long idPais = spinnerPaises.getSelectedItemId();
+
+        Noticia noticia = new Noticia();
+        noticia.setTitulo(Titulo);
+        noticia.setData("01/02/2020");
+        noticia.setConteudo(DescicaoNOT);
+        noticia.setId_Pais(idPais);
+        
+        try{
+            this.getContentResolver().insert(ContentProviderFinal.ENDERECO_NOTICIAS, Converte.noticiaToContentValues(noticia));
+            Toast.makeText(this, "Noticia Inserida", Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+            Toast.makeText(this, "Erro de Inserção", Toast.LENGTH_SHORT).show();
         }
+    }
 
     /**
      * Instantiate and return a new Loader for the given ID.
