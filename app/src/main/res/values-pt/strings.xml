@@ -84,4 +84,6 @@
     <string name="Pais_pais">Nacionalidade:</string>
     <string name="Genero_genero">Gênero:</string>
     <string name="PaisParaVer">Escolha o País</string>
+    <string name="DataDePublicação">Data de Publicação:</string>
+    <string name="Pais_Noticia">Pais:</string>
 </resources>
