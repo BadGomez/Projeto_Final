@@ -40,7 +40,7 @@ public class DisplayPacientes extends AppCompatActivity implements LoaderManager
 
         adaptadorPacientes.setCursor(null);
 
-        LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_PACIENTE,null,this);
+        LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_PACIENTE, null, this);
     }
 
     public void CriarDoente(View view){
