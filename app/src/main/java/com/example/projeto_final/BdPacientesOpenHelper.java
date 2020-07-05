@@ -63,6 +63,16 @@ public class BdPacientesOpenHelper extends SQLiteOpenHelper {
         pais.setNumeroPopulacao(21);
         long idPaisJapao = tabelaPaises.insert(Converte.paisToContentValues(pais));
 
+        BdTabelaNoticias tabelaNoticias = new BdTabelaNoticias(db);
+
+        Noticia noticia = new Noticia();
+        noticia.setTitulo("Infetados em Xangai");
+        noticia.setData("05/07/2020");
+        noticia.setId_Pais(idPaisChina);
+        noticia.setConteudo("Trezentos novos casos de Covid-19 na região de Xangai. Estes casos são provenientes de uma fábrica de calçado no centro da cidade. A mesma já se encontra fechada por motivos de segurança.");
+        tabelaNoticias.insert(Converte.noticiaToContentValues(noticia));
+
+
         BdTabelaPacientes tabelaPacientes = new BdTabelaPacientes(db);
 
         Paciente paciente = new Paciente();

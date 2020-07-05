@@ -57,6 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewNoticias"
         android:layout_width="380dp"
         android:layout_height="399dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonEditNoti"
