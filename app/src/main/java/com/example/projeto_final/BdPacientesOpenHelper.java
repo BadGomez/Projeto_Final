@@ -79,9 +79,19 @@ public class BdPacientesOpenHelper extends SQLiteOpenHelper {
         paciente.setNome("Joana Santos");
         paciente.setData_aniversario("03/07/2001");
         paciente.setGenero("Feminino");
-        paciente.setEstado_atual("Infetada");
+        paciente.setEstado_atual("Infetado");
         paciente.setData_estado_atual("07/07/2020");
         paciente.setDoente_cronico("Sim");
+        paciente.setId_Pais(idPaisJapao);
+        tabelaPacientes.insert(Converte.pacienteToContentValues(paciente));
+
+        paciente = new Paciente();
+        paciente.setNome("Pedro Antunes");
+        paciente.setData_aniversario("03/07/1992");
+        paciente.setGenero("Masculino");
+        paciente.setEstado_atual("Recuperado");
+        paciente.setData_estado_atual("07/07/2020");
+        paciente.setDoente_cronico("Não");
         paciente.setId_Pais(idPaisJapao);
         tabelaPacientes.insert(Converte.pacienteToContentValues(paciente));
     }

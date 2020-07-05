@@ -178,7 +178,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
                     android:hint="@string/Botão_Inscrever"
-                    android:onClick="NovoRegisto"
+                    android:onClick="NovoPaciente"
                     android:textColorHint="#000000"
                     android:textSize="16sp" />
 

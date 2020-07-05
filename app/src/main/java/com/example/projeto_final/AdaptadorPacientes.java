@@ -48,12 +48,14 @@ public class AdaptadorPacientes extends RecyclerView.Adapter<AdaptadorPacientes.
         return cursor.getCount();
     }
 
+    private ViewHolderPaciente viewHolderPacienteSelecionado = null;
+
     public Paciente getPacienteSelecionado() {
         if (viewHolderPacienteSelecionado == null) return null;
         return viewHolderPacienteSelecionado.paciente;
     }
 
-    private ViewHolderPaciente viewHolderPacienteSelecionado = null;
+
 
     public class ViewHolderPaciente extends RecyclerView.ViewHolder implements View.OnClickListener{
         private Paciente paciente = null;

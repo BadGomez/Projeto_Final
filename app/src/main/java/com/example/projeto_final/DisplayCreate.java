@@ -18,9 +18,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.CursorAdapter;
+import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import android.widget.Toast;
+
 
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -30,6 +32,12 @@ import java.util.List;
 public class DisplayCreate extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private Spinner spinnerPaises;
     public static final int ID_CURSOR_LOADER_PAISES = 0;
+    private Spinner dropdowngenero;
+    private CalendarView calendarViewDataNascimento;
+    private Spinner dropdownDoencaCronica;
+    private Spinner dropdownEstadoAtual;
+    private CalendarView calendarViewDataEstadoAtual;
+    private EditText TextInputEditNome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +45,6 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
         setContentView(R.layout.activity_display_create);
 
         Intent intentcriar = getIntent();
-
-
 
         // ---------- Spinner de seleção do Género -----------   https://www.youtube.com/watch?v=4xKsWNmULr0
 
@@ -126,7 +132,35 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
         mostrarDadosSpinnerPaises(null);
 
         LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_PAISES, null , this);
+
         //------------------------------------------------------------------------------------
+
+        TextInputEditText TextInputEditNome = (TextInputEditText) findViewById(R.id.TextInputEditNome);
+
+
+
+
+        //------------------------------------Data de Aniversário------------------------------- https://www.youtube.com/watch?v=j_-dmsRWL3g
+        CalendarView calendarViewDataNascimento = (CalendarView) findViewById(R.id.calendarViewDataNascimento);
+
+        calendarViewDataNascimento.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                String data_aniversario = dayOfMonth + "/" + month + "/" + year;
+            }
+        });
+        //---------------------------------------------------------------------------------------
+        //------------------------------------Data Estado Atual----------------------------------
+        CalendarView calendarViewDataEstadoAtual = (CalendarView) findViewById(R.id.calendarViewDataEstadoAtual);
+
+        calendarViewDataEstadoAtual.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                String data_estado_atual = dayOfMonth + "/" + month + "/" + year;
+            }
+        });
+
+        //---------------------------------------------------------------------------------------
     }
 
     private void mostrarDadosSpinnerPaises(Cursor data) {
@@ -140,36 +174,39 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
         spinnerPaises.setAdapter(adapter);
     }
 
-    public void NovoRegisto(View view) {
-        TextInputEditText TextInputEditNome = (TextInputEditText) findViewById(R.id.TextInputEditNome);
+        //saving data
+    public void NovoPaciente(View view) {
+
+        long paisEscolhido = spinnerPaises.getSelectedItemId();
+        String Genero = dropdowngenero.getSelectedItem().toString();
+        String DataAniv = calendarViewDataNascimento.toString();
+        String Doenca_Cronica = dropdownDoencaCronica.getSelectedItem().toString();
+        String Estado_Atual = dropdownEstadoAtual.getSelectedItem().toString();
+        String DataEstadoAtual = calendarViewDataEstadoAtual.toString();
         String nome = TextInputEditNome.getText().toString();
 
-        if (nome.length() < 1) {
-            TextInputEditNome.setError(getString(R.string.Campo_Obrigatorio));
-            TextInputEditNome.requestFocus();
-            return;
+            if (nome.length() < 1) {
+                TextInputEditNome.setError(getString(R.string.Campo_Obrigatorio));
+                TextInputEditNome.requestFocus();
+                return;
+            }
+
+        Paciente paciente = new Paciente();
+        paciente.setNome(nome);
+        paciente.setId_Pais(paisEscolhido);
+        paciente.setGenero(Genero);
+        paciente.setData_aniversario(DataAniv);
+        paciente.setDoente_cronico(Doenca_Cronica);
+        paciente.setEstado_atual(Estado_Atual);
+        paciente.setData_estado_atual(DataEstadoAtual);
+
+
+        try {
+            this.getContentResolver().insert(ContentProviderFinal.ENDERECO_PACIENTES, Converte.pacienteToContentValues(paciente));
+            Toast.makeText(this, "SUCESSO", Toast.LENGTH_SHORT).show();
+        } catch (Exception e){
+            Toast.makeText(this, "FALHOU", Toast.LENGTH_SHORT).show();
         }
-
-        //------------------------------------Data de Aniversário------------------------------- https://www.youtube.com/watch?v=j_-dmsRWL3g
-        CalendarView calendarViewDataNascimento = (CalendarView) findViewById(R.id.calendarViewDataNascimento);
-
-        calendarViewDataNascimento.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                String dateAniversario = dayOfMonth + "/" + month + "/" + year;
-            }
-        });
-        //---------------------------------------------------------------------------------------
-        //------------------------------------Data Estado Atual----------------------------------
-        CalendarView calendarViewDataEstadoAtual = (CalendarView) findViewById(R.id.calendarViewDataEstadoAtual);
-
-        calendarViewDataEstadoAtual.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                String dataEstadoAtual = dayOfMonth + "/" + month + "/" + year;
-            }
-        });
-        //---------------------------------------------------------------------------------------*/
     }
 
     /**
