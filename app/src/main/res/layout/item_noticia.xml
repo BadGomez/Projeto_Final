@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="280dp">
+    android:layout_height="220dp">
 
     <TextView
         android:id="@+id/textViewTituloNoticia"
@@ -11,28 +11,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:text="TextView"
+        android:textStyle="bold"
+        android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextTextMultiLineConteudoNoticia"
-        android:layout_width="367dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PaisNoticia" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:textAllCaps="true" />
 
     <TextView
         android:id="@+id/DataNoticia"
@@ -53,6 +39,7 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textSize="16sp"
+        android:textColor="#000000"
         app:layout_constraintBaseline_toBaselineOf="@+id/DataNoticia"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -77,8 +64,24 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textSize="16sp"
+        android:textColor="#000000"
         app:layout_constraintBaseline_toBaselineOf="@+id/PaisNoticia"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/PaisNoticia" />
+
+    <TextView
+        android:id="@+id/editTextTextMultiLineConteudoNoticia"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:textColor="#000000"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PaisNoticia" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
