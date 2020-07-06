@@ -88,4 +88,6 @@
     <string name="Pais_Noticia">Pais:</string>
     <string name="Edit_New">Editar Noticia</string>
     <string name="Cancelar">Cancelar</string>
+    <string name="SucessoCriacao">Criado com Sucesso</string>
+    <string name="CriacaoFalhada">Criação Falhada</string>
 </resources>

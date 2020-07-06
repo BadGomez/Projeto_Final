@@ -127,7 +127,6 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
         String Genero = ((Spinner) findViewById(R.id.spinnerGenero)).getSelectedItem().toString();
         long paisEscolhido = spinnerPaises.getSelectedItemId();
         String Doenca_Cronica = ((Spinner) findViewById(R.id.spinnerDoencaCronica)).getSelectedItem().toString();
-
         String nome = TextInputEditNome.getText().toString();
 
             if (nome.length() < 1) {
@@ -148,9 +147,9 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
 
         try {
             this.getContentResolver().insert(ContentProviderFinal.ENDERECO_PACIENTES, Converte.pacienteToContentValues(paciente));
-            Toast.makeText(this, "SUCESSO", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.SucessoCriacao, Toast.LENGTH_SHORT).show();
         } catch (Exception e){
-            Toast.makeText(this, "FALHOU", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.CriacaoFalhada, Toast.LENGTH_SHORT).show();
         }
         Intent intentPacientes = new Intent(this, DisplayPacientes.class);
         startActivity(intentPacientes);

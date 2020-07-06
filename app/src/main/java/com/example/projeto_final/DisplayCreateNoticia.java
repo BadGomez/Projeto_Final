@@ -98,9 +98,9 @@ public class DisplayCreateNoticia extends AppCompatActivity implements LoaderMan
 
         try{
             this.getContentResolver().insert(ContentProviderFinal.ENDERECO_NOTICIAS, Converte.noticiaToContentValues(noticia));
-            Toast.makeText(this, "Noticia Inserida", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.SucessoCriacao, Toast.LENGTH_SHORT).show();
         }catch (Exception e){
-            Toast.makeText(this, "Erro de Inserção", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.CriacaoFalhada, Toast.LENGTH_SHORT).show();
         }
 
         Intent intentNoticias = new Intent(this, DisplayNoticias.class);

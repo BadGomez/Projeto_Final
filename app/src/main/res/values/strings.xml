@@ -87,4 +87,6 @@
     <string name="Pais_Noticia">Country:</string>
     <string name="Edit_New">Edit New</string>
     <string name="Cancelar">Cancel</string>
+    <string name="SucessoCriacao">Successfully created</string>
+    <string name="CriacaoFalhada">Failed Creation</string>
 </resources>
