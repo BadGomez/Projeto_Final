@@ -207,6 +207,8 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
         } catch (Exception e){
             Toast.makeText(this, "FALHOU", Toast.LENGTH_SHORT).show();
         }
+        Intent intentPacientes = new Intent(this, DisplayPacientes.class);
+        startActivity(intentPacientes);
     }
 
     /**

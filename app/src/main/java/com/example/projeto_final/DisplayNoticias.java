@@ -14,9 +14,12 @@ import android.content.Context;
 import androidx.loader.content.CursorLoader;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.Toast;
 
 public class DisplayNoticias extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
@@ -24,6 +27,7 @@ public class DisplayNoticias extends AppCompatActivity implements LoaderManager.
     public static final int ID_CURSOR_LOADER_NOTICIA = 0;
     private AdaptadorNoticias adaptadorNoticias;
     private RecyclerView recyclerViewNoticias;
+    private Noticia noticia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,19 @@ public class DisplayNoticias extends AppCompatActivity implements LoaderManager.
         adaptadorNoticias.setCursor(null);
 
         LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_NOTICIA,null, this);
+
+        Button buttonEleminateNoti = (Button) findViewById(R.id.buttonEleminateNoti);
+        buttonEleminateNoti.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Called when a view has been clicked.
+             *
+             * @param v The view that was clicked.
+             */
+            @Override
+            public void onClick(View v) {
+                removeItem();
+            }
+        });
     }
 
     public void CriarNoticia(View view){
@@ -126,5 +143,20 @@ public class DisplayNoticias extends AppCompatActivity implements LoaderManager.
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
         adaptadorNoticias.setCursor(null);
+    }
+
+    public void removeItem(){
+        try{
+            Uri enderecoNoticia = Uri.withAppendedPath(ContentProviderFinal.ENDERECO_NOTICIAS, String.valueOf(noticia.getId()));
+
+            int apagados = getContentResolver().delete(enderecoNoticia,null,null);
+            if(apagados == 1){
+                Toast.makeText(this, "Noticia eliminado com sucesso", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }catch (Exception e) {
+
+        }
+        Toast.makeText(this,"Noticia não eliminada", Toast.LENGTH_SHORT).show();
     }
 }
