@@ -25,7 +25,7 @@ public class DisplayPacientes extends AppCompatActivity implements LoaderManager
     private AdaptadorPacientes adaptadorPacientes;
     private RecyclerView recyclerViewPacientes;
 
-    private Paciente paciente = null;
+    private Paciente paciente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

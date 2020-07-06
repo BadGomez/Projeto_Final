@@ -60,17 +60,6 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
 
         dropdowngenero.setAdapter(adapter);
 
-        dropdowngenero.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String genero = parent.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         //------------------------------------------------------------
 
         // ---------- Spinner de seleção de Doença Crónica -----------
@@ -86,17 +75,6 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
 
         dropdownDoencaCronica.setAdapter(adapter2);
 
-        dropdownDoencaCronica.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String doente_cronico = parent.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         //------------------------------------------------------------
 
         // ---------- Spinner de seleção do Estado Atual -------------
@@ -114,18 +92,6 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
 
         dropdownEstadoAtual.setAdapter(adapter3);
 
-        dropdownEstadoAtual.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            String estado_atual;
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String estado_atual = parent.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         //-----------------------------------------------------------------------
 
         // ---------- Spinner de seleção do País ---------------------
@@ -135,19 +101,6 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
 
         LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_PAISES, null , this);
 
-        //------------------------------------------------------------------------------------
-
-        TextInputEditText TextInputEditNome = (TextInputEditText) findViewById(R.id.TextInputEditNome);
-
-        //------------------------------------Data de Aniversário-------------------------------
-        CalendarView calendarViewDataNascimento = (CalendarView) findViewById(R.id.calendarViewDataNascimento);
-
-
-        //---------------------------------------------------------------------------------------
-        //------------------------------------Data Estado Atual----------------------------------
-        CalendarView calendarViewDataEstadoAtual = (CalendarView) findViewById(R.id.calendarViewDataEstadoAtual);
-
-        //---------------------------------------------------------------------------------------
     }
 
     private void mostrarDadosSpinnerPaises(Cursor data) {
@@ -164,12 +117,16 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
         //saving data
     public void NovoPaciente(View view) {
 
+        TextInputEditText TextInputEditNome = (TextInputEditText) findViewById(R.id.TextInputEditNome);
+        CalendarView calendarViewDataNascimento = (CalendarView) findViewById(R.id.calendarViewDataNascimento);
+        CalendarView calendarViewDataEstadoAtual = (CalendarView) findViewById(R.id.calendarViewDataEstadoAtual);
+
         String data_nascimento = new Date(calendarViewDataNascimento.getDate()).toString();
-        String data_estado_atual = new Date(calendarViewDataEstadoAtual.getDate()).toString();
+       String data_estado_atual = new Date(calendarViewDataEstadoAtual.getDate()).toString();
+        //String Genero = dropdowngenero.getSelectedItem().toString();
         long paisEscolhido = spinnerPaises.getSelectedItemId();
-        String Genero = dropdowngenero.getSelectedItem().toString();
-        String Doenca_Cronica = dropdownDoencaCronica.getSelectedItem().toString();
-        String Estado_Atual = dropdownEstadoAtual.getSelectedItem().toString();
+       // String Doenca_Cronica = dropdownDoencaCronica.getSelectedItem().toString();
+        //String Estado_Atual = dropdownEstadoAtual.getSelectedItem().toString();
         String nome = TextInputEditNome.getText().toString();
 
             if (nome.length() < 1) {
@@ -181,10 +138,10 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
         Paciente paciente = new Paciente();
         paciente.setNome(nome);
         paciente.setId_Pais(paisEscolhido);
-        paciente.setGenero(Genero);
+        paciente.setGenero("Masculino");
         paciente.setData_aniversario(data_nascimento);
-        paciente.setDoente_cronico(Doenca_Cronica);
-        paciente.setEstado_atual(Estado_Atual);
+        paciente.setDoente_cronico("Não");
+        paciente.setEstado_atual("Recuperado");
         paciente.setData_estado_atual(data_estado_atual);
 
 
