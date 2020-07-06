@@ -122,11 +122,12 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
         CalendarView calendarViewDataEstadoAtual = (CalendarView) findViewById(R.id.calendarViewDataEstadoAtual);
 
         String data_nascimento = new Date(calendarViewDataNascimento.getDate()).toString();
-       String data_estado_atual = new Date(calendarViewDataEstadoAtual.getDate()).toString();
-        //String Genero = dropdowngenero.getSelectedItem().toString();
+        String data_estado_atual = new Date(calendarViewDataEstadoAtual.getDate()).toString();
+        String estado_atual = ((Spinner) findViewById(R.id.spinnerEstadoAtual)).getSelectedItem().toString();
+        String Genero = ((Spinner) findViewById(R.id.spinnerGenero)).getSelectedItem().toString();
         long paisEscolhido = spinnerPaises.getSelectedItemId();
-       // String Doenca_Cronica = dropdownDoencaCronica.getSelectedItem().toString();
-        //String Estado_Atual = dropdownEstadoAtual.getSelectedItem().toString();
+        String Doenca_Cronica = ((Spinner) findViewById(R.id.spinnerDoencaCronica)).getSelectedItem().toString();
+
         String nome = TextInputEditNome.getText().toString();
 
             if (nome.length() < 1) {
@@ -138,10 +139,10 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
         Paciente paciente = new Paciente();
         paciente.setNome(nome);
         paciente.setId_Pais(paisEscolhido);
-        paciente.setGenero("Masculino");
+        paciente.setGenero(Genero);
         paciente.setData_aniversario(data_nascimento);
-        paciente.setDoente_cronico("Não");
-        paciente.setEstado_atual("Recuperado");
+        paciente.setDoente_cronico(Doenca_Cronica);
+        paciente.setEstado_atual(estado_atual);
         paciente.setData_estado_atual(data_estado_atual);
 
 
