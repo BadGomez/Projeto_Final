@@ -86,4 +86,6 @@
     <string name="PaisParaVer">Escolha o País</string>
     <string name="DataDePublicação">Data de Publicação:</string>
     <string name="Pais_Noticia">Pais:</string>
+    <string name="Edit_New">Editar Noticia</string>
+    <string name="Cancelar">Cancelar</string>
 </resources>

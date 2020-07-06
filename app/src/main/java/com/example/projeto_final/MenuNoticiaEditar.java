@@ -1,64 +1,19 @@
 package com.example.projeto_final;
 
+import android.content.Context;
+import android.content.CursorLoader;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.widget.CursorAdapter;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.loader.content.Loader;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
-import android.content.Context;
-import androidx.loader.content.CursorLoader;
-import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CursorAdapter;
-import android.widget.Toast;
-
-public class DisplayNoticias extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
-
-    public static final String ID_NOTICIA = "ID_NOTICIA";
-    public static final int ID_CURSOR_LOADER_NOTICIA = 0;
-    private AdaptadorNoticias adaptadorNoticias;
-    private RecyclerView recyclerViewNoticias;
-    private Noticia noticia;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display_noticias);
-
-        Intent intentNoticias = getIntent();
-
-        recyclerViewNoticias = (RecyclerView) findViewById(R.id.recyclerViewNoticias);
-        adaptadorNoticias = new AdaptadorNoticias(this);
-        recyclerViewNoticias.setAdapter(adaptadorNoticias);
-        recyclerViewNoticias.setLayoutManager(new LinearLayoutManager(this));
-
-        adaptadorNoticias.setCursor(null);
-
-        LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_NOTICIA,null, this);
-
-        Button buttonEleminateNoti = (Button) findViewById(R.id.buttonEleminateNoti);
-    }
-
-    public void CriarNoticia(View view){
-        Intent intentcriarNoticia = new Intent(this, DisplayCreateNoticia.class);
-        startActivity(intentcriarNoticia);
-    }
-
-    @Override
-    protected void onResume(){
-        getSupportLoaderManager().restartLoader(ID_CURSOR_LOADER_NOTICIA,null, this);
-        super.onResume();
-    }
-
+public class MenuNoticiaEditar extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     /**
      * Instantiate and return a new Loader for the given ID.
      *
@@ -71,7 +26,7 @@ public class DisplayNoticias extends AppCompatActivity implements LoaderManager.
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        return new CursorLoader(this, ContentProviderFinal.ENDERECO_NOTICIAS, BdTabelaNoticias.TODOS_CAMPOS_NOTICIAS,null,null, BdTabelaNoticias.TITULO_NOTICIA);
+        return null;
     }
 
     /**
@@ -117,7 +72,7 @@ public class DisplayNoticias extends AppCompatActivity implements LoaderManager.
      */
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
-        adaptadorNoticias.setCursor(data);
+
     }
 
     /**
@@ -131,25 +86,6 @@ public class DisplayNoticias extends AppCompatActivity implements LoaderManager.
      */
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-        adaptadorNoticias.setCursor(null);
-    }
 
-    public void removeItem(){
-        try{
-            Uri enderecoNoticia = Uri.withAppendedPath(ContentProviderFinal.ENDERECO_NOTICIAS, String.valueOf(noticia.getId()));
-
-            int apagados = getContentResolver().delete(enderecoNoticia,null,null);
-            if(apagados == 1){
-                Toast.makeText(this, "Noticia eliminado com sucesso", Toast.LENGTH_SHORT).show();
-                return;
-            }
-        }catch (Exception e) {
-
-        }
-        Toast.makeText(this,"Noticia não eliminada", Toast.LENGTH_SHORT).show();
-    }
-
-    public void removeItem(View view) {
-        removeItem();
     }
 }
