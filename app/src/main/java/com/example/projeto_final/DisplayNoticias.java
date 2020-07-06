@@ -45,12 +45,16 @@ public class DisplayNoticias extends AppCompatActivity implements LoaderManager.
 
         LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_NOTICIA,null, this);
 
-        Button buttonEleminateNoti = (Button) findViewById(R.id.buttonEleminateNoti);
     }
 
     public void CriarNoticia(View view){
         Intent intentcriarNoticia = new Intent(this, DisplayCreateNoticia.class);
         startActivity(intentcriarNoticia);
+    }
+
+    public void Editarnoticia(View view){
+        Intent intent = new Intent(this, MenuEditarNoticia.class);
+        startActivity(intent);
     }
 
     @Override
@@ -132,24 +136,5 @@ public class DisplayNoticias extends AppCompatActivity implements LoaderManager.
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
         adaptadorNoticias.setCursor(null);
-    }
-
-    public void removeItem(){
-        try{
-            Uri enderecoNoticia = Uri.withAppendedPath(ContentProviderFinal.ENDERECO_NOTICIAS, String.valueOf(noticia.getId()));
-
-            int apagados = getContentResolver().delete(enderecoNoticia,null,null);
-            if(apagados == 1){
-                Toast.makeText(this, "Noticia eliminado com sucesso", Toast.LENGTH_SHORT).show();
-                return;
-            }
-        }catch (Exception e) {
-
-        }
-        Toast.makeText(this,"Noticia não eliminada", Toast.LENGTH_SHORT).show();
-    }
-
-    public void removeItem(View view) {
-        removeItem();
     }
 }

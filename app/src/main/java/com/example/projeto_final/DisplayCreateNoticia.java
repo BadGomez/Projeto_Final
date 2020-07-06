@@ -79,7 +79,6 @@ public class DisplayCreateNoticia extends AppCompatActivity implements LoaderMan
                 return;
             }
 
-            //------------------------------------Data da Noticia-------------------------------
             CalendarView calendarViewDataNoticia = (CalendarView) findViewById(R.id.calendarViewDataNoticia);
 
 

@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DisplayCreate extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -138,28 +139,13 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
 
         TextInputEditText TextInputEditNome = (TextInputEditText) findViewById(R.id.TextInputEditNome);
 
-
-
-
-        //------------------------------------Data de Aniversário------------------------------- https://www.youtube.com/watch?v=j_-dmsRWL3g
+        //------------------------------------Data de Aniversário-------------------------------
         CalendarView calendarViewDataNascimento = (CalendarView) findViewById(R.id.calendarViewDataNascimento);
 
-        calendarViewDataNascimento.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                String data_aniversario = dayOfMonth + "/" + month + "/" + year;
-            }
-        });
+
         //---------------------------------------------------------------------------------------
         //------------------------------------Data Estado Atual----------------------------------
         CalendarView calendarViewDataEstadoAtual = (CalendarView) findViewById(R.id.calendarViewDataEstadoAtual);
-
-        calendarViewDataEstadoAtual.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                String data_estado_atual = dayOfMonth + "/" + month + "/" + year;
-            }
-        });
 
         //---------------------------------------------------------------------------------------
     }
@@ -178,12 +164,12 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
         //saving data
     public void NovoPaciente(View view) {
 
+        String data_nascimento = new Date(calendarViewDataNascimento.getDate()).toString();
+        String data_estado_atual = new Date(calendarViewDataEstadoAtual.getDate()).toString();
         long paisEscolhido = spinnerPaises.getSelectedItemId();
         String Genero = dropdowngenero.getSelectedItem().toString();
-        String DataAniv = calendarViewDataNascimento.toString();
         String Doenca_Cronica = dropdownDoencaCronica.getSelectedItem().toString();
         String Estado_Atual = dropdownEstadoAtual.getSelectedItem().toString();
-        String DataEstadoAtual = calendarViewDataEstadoAtual.toString();
         String nome = TextInputEditNome.getText().toString();
 
             if (nome.length() < 1) {
@@ -196,10 +182,10 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
         paciente.setNome(nome);
         paciente.setId_Pais(paisEscolhido);
         paciente.setGenero(Genero);
-        paciente.setData_aniversario(DataAniv);
+        paciente.setData_aniversario(data_nascimento);
         paciente.setDoente_cronico(Doenca_Cronica);
         paciente.setEstado_atual(Estado_Atual);
-        paciente.setData_estado_atual(DataEstadoAtual);
+        paciente.setData_estado_atual(data_estado_atual);
 
 
         try {
