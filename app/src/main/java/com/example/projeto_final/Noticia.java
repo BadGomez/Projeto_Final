@@ -1,5 +1,7 @@
 package com.example.projeto_final;
 
+import android.database.Cursor;
+
 public class Noticia {
     private long id = -1;
     private String titulo;
@@ -46,4 +48,37 @@ public class Noticia {
     public void setId_Pais(long id_Pais) {
         this.id_Pais = id_Pais;
     }
+
+    public static Noticia fromCursor(Cursor cursor){
+        long id = cursor.getInt(
+                cursor.getColumnIndex(BdTabelaNoticias._ID)
+        );
+
+        String titulo = cursor.getString(
+                cursor.getColumnIndex(BdTabelaNoticias.TITULO_NOTICIA)
+        );
+
+        String data = cursor.getString(
+                cursor.getColumnIndex(BdTabelaNoticias.DATA_NOTICIA)
+        );
+
+        String conteudo = cursor.getString(
+                cursor.getColumnIndex(BdTabelaNoticias.CONTEUDO_NOTICIA)
+        );
+
+        Long id_PAIS = cursor.getLong(
+                cursor.getColumnIndex(BdTabelaNoticias.CAMPO_ID_PAIS)
+        );
+
+        Noticia noticia = new Noticia();
+
+        noticia.setId(id);
+        noticia.setTitulo(titulo);
+        noticia.setData(data);
+        noticia.setConteudo(conteudo);
+        noticia.setId_Pais(id_PAIS);
+
+        return noticia;
+    }
+
 }

@@ -1,10 +1,16 @@
 package com.example.projeto_final;
 
 import android.content.Context;
-import android.content.CursorLoader;
+import androidx.loader.content.CursorLoader;
+import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.CursorAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +20,57 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
 public class MenuNoticiaEditar extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+    public static final int ID_CURSOR_LOADER_NOTICIAS = 0;
+    private Noticia noticia;
+
+    private Spinner spinnerPaisNoticia;
+    private TextView textViewTituloNoticia;
+    private TextView textViewDataNoticia;
+    private TextView textViewDescricaoNoticia;
+    private Uri enderecoNoticiaEditar;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_menu_noticia_editar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        textViewTituloNoticia = (TextView) findViewById(R.id.textViewTituloNoticia);
+        textViewDataNoticia = (TextView) findViewById(R.id.textViewDataNoticia);
+        textViewDescricaoNoticia = (TextView) findViewById(R.id.textViewDescricaoNoticia);
+        spinnerPaisNoticia = (Spinner) findViewById(R.id.spinnerPaisNoticia);
+
+        getSupportLoaderManager().initLoader(ID_CURSOR_LOADER_NOTICIAS, null,this);
+
+        Intent intent = getIntent();
+
+        long idNoticia = intent.getLongExtra(DisplayNoticias.ID_NOTICIA, -1);
+
+        if(idNoticia == -1){
+            Toast.makeText(this, "Ocorreu um Erro", Toast.LENGTH_LONG ).show();
+            finish();
+            return;
+        }
+
+        enderecoNoticiaEditar = Uri.withAppendedPath(ContentProviderFinal.ENDERECO_NOTICIAS,String.valueOf(idNoticia));
+
+        Cursor cursor = getContentResolver().query(enderecoNoticiaEditar, BdTabelaNoticias.TODOS_CAMPOS_NOTICIAS, null,null,null);
+
+        if (!cursor.moveToNext()) {
+            Toast.makeText(this, "Try again Later", Toast.LENGTH_LONG ).show();
+            finish();
+            return;
+        }
+
+        noticia = Noticia.fromCursor(cursor);
+
+        textViewTituloNoticia.setText(noticia.getTitulo());
+        textViewDataNoticia.setText(noticia.getData());
+        textViewDescricaoNoticia.setText(noticia.getConteudo());
+
+    }
+
     /**
      * Instantiate and return a new Loader for the given ID.
      *
@@ -26,7 +83,7 @@ public class MenuNoticiaEditar extends AppCompatActivity implements LoaderManage
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        return null;
+        return new CursorLoader(this, ContentProviderFinal.ENDERECO_NOTICIAS, BdTabelaNoticias.TODOS_CAMPOS_NOTICIAS, null,null, BdTabelaNoticias.TITULO_NOTICIA);
     }
 
     /**

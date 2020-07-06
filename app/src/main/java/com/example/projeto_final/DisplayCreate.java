@@ -114,6 +114,7 @@ public class DisplayCreate extends AppCompatActivity implements LoaderManager.Lo
         dropdownEstadoAtual.setAdapter(adapter3);
 
         dropdownEstadoAtual.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            String estado_atual;
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String estado_atual = parent.getItemAtPosition(position).toString();

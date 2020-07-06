@@ -23,6 +23,8 @@ import androidx.loader.content.Loader;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.Date;
+
 
 public class DisplayCreateNoticia extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private Spinner spinnerPaises;
@@ -80,21 +82,18 @@ public class DisplayCreateNoticia extends AppCompatActivity implements LoaderMan
             //------------------------------------Data da Noticia-------------------------------
             CalendarView calendarViewDataNoticia = (CalendarView) findViewById(R.id.calendarViewDataNoticia);
 
-            calendarViewDataNoticia.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-                @Override
-                public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                    String dataEstadoAtual = dayOfMonth+"/"+month+"/"+year;
-                }
-            });
-            //---------------------------------------------------------------------------------------
 
         //Criar Noticia
 
         long idPais = spinnerPaises.getSelectedItemId();
 
+
         Noticia noticia = new Noticia();
         noticia.setTitulo(Titulo);
-        noticia.setData("01/02/2020"); //todo: como meter data do calendarView?
+
+        String data_estado = new Date(calendarViewDataNoticia.getDate()).toString();
+
+        noticia.setData(data_estado);
         noticia.setConteudo(DescicaoNOT);
         noticia.setId_Pais(idPais);
 
