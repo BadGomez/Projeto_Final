@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CursorAdapter;
@@ -28,6 +29,7 @@ public class DisplayNoticias extends AppCompatActivity implements LoaderManager.
     private AdaptadorNoticias adaptadorNoticias;
     private RecyclerView recyclerViewNoticias;
     private Noticia noticia;
+   // Noticia noticia = adaptadorNoticias.getNoticiaSelecionado();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +54,10 @@ public class DisplayNoticias extends AppCompatActivity implements LoaderManager.
         startActivity(intentcriarNoticia);
     }
 
-    public void Editarnoticia(View view){
-        Intent intent = new Intent(this, MenuEditarNoticia.class);
-        startActivity(intent);
+    public void alterarNoticia(View view){
+        Intent intentAlterarNoticia = new Intent(this, MenuEditarNoticia.class);
+        startActivity(intentAlterarNoticia);
+        //intentAlterarNoticia.putExtra(ID_NOTICIA, AdaptadorNoticias.getNoticiaSelecionado().getId());
     }
 
     @Override

@@ -93,12 +93,12 @@ public class AdaptadorNoticias extends RecyclerView.Adapter<AdaptadorNoticias.Vi
         return cursor.getCount();
     }
 
-    private ViewHolderNoticias viewHolderNoticiasSelecionado = null;
-
-    public Noticia getNoticiaSelecionado(){
+    public  Noticia getNoticiaSelecionado(){
         if(viewHolderNoticiasSelecionado == null) return null;
         return viewHolderNoticiasSelecionado.noticia;
     }
+
+    private ViewHolderNoticias viewHolderNoticiasSelecionado = null;
 
     public class ViewHolderNoticias extends RecyclerView.ViewHolder implements View.OnClickListener{
 
@@ -134,10 +134,6 @@ public class AdaptadorNoticias extends RecyclerView.Adapter<AdaptadorNoticias.Vi
          */
         @Override
         public void onClick(View v) {
-            if(viewHolderNoticiasSelecionado == this){
-                return;
-            }
-
             if(viewHolderNoticiasSelecionado != null){
                 viewHolderNoticiasSelecionado.desSelecionado();
             }
@@ -145,7 +141,7 @@ public class AdaptadorNoticias extends RecyclerView.Adapter<AdaptadorNoticias.Vi
             viewHolderNoticiasSelecionado = this;
             seleciona();
 
-            DisplayNoticias displayNoticias = (DisplayNoticias) AdaptadorNoticias.this.context;
+           // DisplayNoticias displayNoticias = (DisplayNoticias) AdaptadorNoticias.this.context;
         }
 
         private void seleciona() {

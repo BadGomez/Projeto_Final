@@ -33,12 +33,6 @@ import java.util.List;
 public class DisplayCreate extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private Spinner spinnerPaises;
     public static final int ID_CURSOR_LOADER_PAISES = 0;
-    private Spinner dropdowngenero;
-    private CalendarView calendarViewDataNascimento;
-    private Spinner dropdownDoencaCronica;
-    private Spinner dropdownEstadoAtual;
-    private CalendarView calendarViewDataEstadoAtual;
-    private EditText TextInputEditNome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Projeto_Final</string>
+    <string name="app_name">Covid In Europe</string>
     <string name="Botão_Criar_Doente">Insert</string>
     <string name="Botão_Ver">Check</string>
     <string name="Aplicacão_Nome">Covid-19 in Europe</string>
